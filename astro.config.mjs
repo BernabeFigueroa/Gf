@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://giovannifrontini.com',
+  site: 'https://bernabefigueroa.github.io',
+  base: '/Gf',
   devToolbar: {
     enabled: false,
   },
