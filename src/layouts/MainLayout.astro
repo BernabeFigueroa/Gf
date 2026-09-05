@@ -1,6 +1,4 @@
 ---
-import '../styles/global.css';
-
 interface Props {
   title?: string;
   description?: string;
@@ -19,6 +17,9 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>{title}</title>
   <meta name="description" content={description}>
+
+  <!-- Preload Custom Editorial Font -->
+  <link rel="preload" href="/font/Patinio Basica.ttf" as="font" type="font/ttf" crossorigin>
 
   <!-- Fallback & Micro-copy Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
