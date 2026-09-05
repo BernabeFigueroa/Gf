@@ -1,0 +1,51 @@
+---
+// MobileMenuModal.astro - Menú modal a pantalla completa con desenfoque (estilo Pacto Estudio)
+---
+<div id="mobile-nav-modal" class="mobile-nav-modal" aria-hidden="true">
+  <!-- Logotipo superior dentro del modal -->
+  <div class="modal-header">
+    <a href="#home" class="brand-title modal-brand" data-action="nav-home">
+      GIOVANNI FRONTINI
+    </a>
+  </div>
+
+  <!-- Enlaces de navegación centrados verticalmente -->
+  <div class="modal-links-container">
+    <button class="modal-nav-link active" data-target="home" data-action="nav-home" data-i18n="nav_home">INICIO</button>
+    <button class="modal-nav-link" data-target="arquitectura" data-action="filter-arquitectura" data-i18n="nav_arquitectura">ARQUITECTURA & INTERIORES</button>
+    <button class="modal-nav-link" data-target="marmol" data-action="filter-marmol" data-i18n="nav_marmol">MÁRMOL</button>
+    <button class="modal-nav-link" data-target="projects" data-action="filter-all" data-i18n="nav_projects">PROYECTOS</button>
+    <button class="modal-nav-link" data-target="about" data-action="nav-about" data-i18n="nav_about">SOBRE MÍ</button>
+
+    <div class="modal-controls-group">
+      <a href="https://www.instagram.com/marmoleriafrontini/" target="_blank" rel="noopener" class="modal-icon-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="modal-svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+      <button id="modal-lang-btn" class="modal-lang-pill" data-action="toggle-lang">ES</button>
+      <button class="modal-theme-toggle" data-action="toggle-theme" aria-label="Cambiar tema de color">
+        <div class="theme-switch-knob"></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Barra inferior del modal con botón de correo a la izquierda y cerrar a la derecha -->
+  <div class="modal-bottom-bar">
+    <a href="mailto:studio@giovannifrontini.com" class="mobile-nav-btn mail-icon-btn" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mobile-bottom-svg">
+        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+      </svg>
+    </a>
+
+    <button class="mobile-nav-btn close-menu-btn" data-action="close-mobile-menu" aria-label="Cerrar menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-bottom-svg">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</div>

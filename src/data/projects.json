@@ -1,0 +1,165 @@
+{
+  "about": {
+    "manifesto_title_es": "DISCIPLINA Y SILENCIO",
+    "manifesto_title_en": "DISCIPLINE & SILENCE",
+    "bio1_es": "Giovanni Frontini opera en la intersección de la pureza tectónica, la materialidad mineral cruda y la luz coreografiada. Fundado en 2016, el estudio concibe la arquitectura no como una imposición formal, sino como un encuadre deliberado del espacio, el vacío y la luz natural.",
+    "bio1_en": "Giovanni Frontini operates at the intersection of tectonic purity, raw mineral materiality, and choreographed daylight. Founded in 2016, the studio conceives architecture not as formal imposition, but as a deliberate framing of space, void, and natural light.",
+    "bio2_es": "Cada proyecto responde directamente a su topografía e identidad geológica, utilizando piedra, concreto aparente, maderas oscuras y oxidaciones naturales para crear refugios atmosféricos que envejecen con dignidad.",
+    "bio2_en": "Every project responds directly to its topography and geological identity, utilizing stone, exposed concrete, dark timber, and natural oxidations to craft atmospheric shelters that age with quiet dignity.",
+    "details_btn_es": "DETALLES",
+    "details_btn_en": "DETAILS"
+  },
+  "projects": [
+    {
+      "id": "casa-pedregal",
+      "title": "CASA PEDREGAL",
+      "category": "residential",
+      "year": "2024",
+      "location": "MEXICO CITY, MX",
+      "surface": "680 M²",
+      "type": "RESIDENTIAL",
+      "status": "BUILT",
+      "photographer": "RAFAEL GAMO",
+      "heroImage": "/images/projects/casa-pedregal-hero.webp",
+      "gallery": [
+        "/images/projects/casa-pedregal-gallery-1.webp",
+        "/images/projects/casa-pedregal-gallery-2.webp",
+        "/images/projects/casa-pedregal-gallery-3.webp",
+        "/images/projects/casa-pedregal-gallery-4.webp"
+      ],
+      "desc_es": "Monolito de tierra volcánica y basalto negro enraizado en la topografía del Pedregal. El programa se articula mediante patios de sombra profunda, concreto enduelado y carpinterías macizas de pino carbonizado.",
+      "desc_en": "An earthen volcanic basalt monolith embedded into the Pedregal bedrock. Domestic rituals organize around deep shadow patios, board-formed pigmented concrete, and charred solid pine millwork."
+    },
+    {
+      "id": "pabellon-umbria",
+      "title": "PABELLÓN UMBRÍA",
+      "category": "residential",
+      "year": "2023",
+      "location": "VALLE DE BRAVO, MX",
+      "surface": "420 M²",
+      "type": "RESIDENTIAL",
+      "status": "BUILT",
+      "photographer": "CÉSAR BÉJAR",
+      "heroImage": "/images/projects/pabellon-umbria-hero.webp",
+      "gallery": [
+        "/images/projects/pabellon-umbria-gallery-1.webp",
+        "/images/projects/pabellon-umbria-gallery-2.webp",
+        "/images/projects/pabellon-umbria-gallery-3.webp"
+      ],
+      "desc_es": "Refugio silencioso entre pinos y encinos. Un basamento continuo de piedra caliza sostiene losas delgadas de hormigón que parecen levitar sobre el sotobosque.",
+      "desc_en": "A silent refuge amidst pine forests. A continuous limestone plinth supports slender concrete slabs that hover weightlessly above the damp forest floor."
+    },
+    {
+      "id": "galeria-san-miguel",
+      "title": "ESPACIO MATERIA",
+      "category": "retail",
+      "year": "2023",
+      "location": "SAN MIGUEL DE ALLENDE",
+      "surface": "310 M²",
+      "type": "RETAIL / GALLERY",
+      "status": "BUILT",
+      "photographer": "RORY GARDINER",
+      "heroImage": "/images/projects/galeria-san-miguel-hero.webp",
+      "gallery": [
+        "/images/projects/galeria-san-miguel-gallery-1.webp",
+        "/images/projects/galeria-san-miguel-gallery-2.webp",
+        "/images/projects/galeria-san-miguel-gallery-3.webp"
+      ],
+      "desc_es": "Galería de diseño escultórico y mobiliario textil. Recuperación de muros de mampostería colonial encalados con cal viva, combinados con placas de acero oxidado al ácido.",
+      "desc_en": "A sculptural design and textile gallery. Restoration of colonial masonry washed in natural slaked lime, paired with acid-oxidized structural steel plates."
+    },
+    {
+      "id": "boutique-roma",
+      "title": "BOUTIQUE ARRECIFE",
+      "category": "retail",
+      "year": "2024",
+      "location": "COLONIA ROMA, CDMX",
+      "surface": "195 M²",
+      "type": "RETAIL",
+      "status": "BUILT",
+      "photographer": "IGNACIO URQUIZA",
+      "heroImage": "/images/projects/boutique-roma-hero.webp",
+      "gallery": [
+        "/images/projects/boutique-roma-gallery-1.webp",
+        "/images/projects/boutique-roma-gallery-2.webp",
+        "/images/projects/boutique-roma-gallery-3.webp"
+      ],
+      "desc_es": "Intervención comercial minimalista con terrazo desbastado in situ, mobiliario en bloque monolítico de cantera rosa y luz rasante indirecta.",
+      "desc_en": "Minimalist retail interior featuring in-situ ground terrazzo, monolithic pink cantera stone displays, and choreographed raking light."
+    },
+    {
+      "id": "villa-tulum",
+      "title": "RESIDENCIA CENOTE",
+      "category": "residential",
+      "year": "2022",
+      "location": "TULUM, QUINTANA ROO",
+      "surface": "530 M²",
+      "type": "RESIDENTIAL",
+      "status": "BUILT",
+      "photographer": "LORENZO ZANDRI",
+      "heroImage": "/images/projects/villa-tulum-hero.webp",
+      "gallery": [
+        "/images/projects/villa-tulum-gallery-1.webp",
+        "/images/projects/villa-tulum-gallery-2.webp",
+        "/images/projects/villa-tulum-gallery-3.webp"
+      ],
+      "desc_es": "Vivienda inmersa en la selva baja maya. Acabado artesanal tradicional de chukum en muros y piscinas, generando una atmósfera húmeda y serena.",
+      "desc_en": "A dwelling immersed in the Mayan low jungle. Authentic artisanal chukum plaster across walls and natural immersion pools, creating a humid and tranquil atmosphere."
+    },
+    {
+      "id": "concept-store-oaxaca",
+      "title": "TIENDA BARRO",
+      "category": "retail",
+      "year": "2023",
+      "location": "OAXACA DE JUÁREZ",
+      "surface": "160 M²",
+      "type": "RETAIL",
+      "status": "BUILT",
+      "photographer": "ALBERTO MORENO",
+      "heroImage": "/images/projects/concept-store-oaxaca-hero.webp",
+      "gallery": [
+        "/images/projects/concept-store-oaxaca-gallery-1.webp",
+        "/images/projects/concept-store-oaxaca-gallery-2.webp"
+      ],
+      "desc_es": "Espacio comercial dedicado a la cerámica contemporánea. Bloques de tierra compactada y celosías de ladrillo cocido filtran la luz cenital del valle.",
+      "desc_en": "A flagship space dedicated to contemporary ceramics. Rammed-earth blocks and terracotta brise-soleil filter the intense high-altitude sunlight."
+    },
+    {
+      "id": "casa-cordillera",
+      "title": "CASA CORDILLERA",
+      "category": "residential",
+      "year": "2024",
+      "location": "MONTERREY, NL",
+      "surface": "850 M²",
+      "type": "RESIDENTIAL",
+      "status": "BUILT",
+      "photographer": "MARCOS BETANZOS",
+      "heroImage": "/images/projects/casa-cordillera-hero.webp",
+      "gallery": [
+        "/images/projects/casa-cordillera-gallery-1.webp",
+        "/images/projects/casa-cordillera-gallery-2.webp",
+        "/images/projects/casa-cordillera-gallery-3.webp"
+      ],
+      "desc_es": "Estructura brutalista escalonada en la ladera de la Sierra Madre. Muros masivos de concreto aparente ocre que dialogan con el peñasco montañoso.",
+      "desc_en": "Stepped brutalist structure clinging to the Sierra Madre slope. Massive ochre concrete retaining walls echoing the jagged mountain geology."
+    },
+    {
+      "id": "showroom-polanco",
+      "title": "ESTUDIO LÍNEA",
+      "category": "retail",
+      "year": "2023",
+      "location": "POLANCO, CDMX",
+      "surface": "240 M²",
+      "type": "RETAIL / SHOWROOM",
+      "status": "BUILT",
+      "photographer": "ONNIS LUQUE",
+      "heroImage": "/images/projects/showroom-polanco-hero.webp",
+      "gallery": [
+        "/images/projects/showroom-polanco-gallery-1.webp",
+        "/images/projects/showroom-polanco-gallery-2.webp"
+      ],
+      "desc_es": "Showroom de alta iluminación y diseño de interiores. Intervención cromática estricta en tonos ciruela, chocolate y acero inoxidable cepillado.",
+      "desc_en": "High-end lighting and spatial design showroom. Strict tonal palette of plum-chocolate tones, warm stone, and satin-brushed stainless steel."
+    }
+  ]
+}

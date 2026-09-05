@@ -1,0 +1,43 @@
+---
+// ProjectStrip.astro - Franja editorial de metadatos en vista de proyecto (Pactoestudio layout)
+---
+<!-- Horizontal Scroll Progress Bar (Expands outward from center) -->
+<div class="project-progress-container">
+  <div id="project-progress-bar" class="project-progress-bar"></div>
+</div>
+
+<!-- Slide Indicator Dot above metadata strip -->
+<div class="project-dot-indicator"></div>
+
+<!-- Desktop Bottom Project Metadata Strip (Title Left + Columns Right) -->
+<div id="desktop-project-strip" class="desktop-project-strip">
+  <div class="strip-brand-title">
+    <h2 id="p-name" class="p-title-display">CASA PEDREGAL</h2>
+  </div>
+  <div class="strip-columns-group">
+    <div class="strip-col">
+      <span class="strip-key" data-i18n="meta_year">AÑO</span>
+      <span id="p-year" class="strip-val">2024</span>
+    </div>
+    <div class="strip-col">
+      <span class="strip-key" data-i18n="meta_location">UBICACIÓN</span>
+      <span id="p-loc" class="strip-val">MEXICO CITY, MX</span>
+    </div>
+    <div class="strip-col">
+      <span class="strip-key" data-i18n="meta_surface">SUPERFICIE</span>
+      <span id="p-surf" class="strip-val">680 M²</span>
+    </div>
+    <div class="strip-col">
+      <span class="strip-key" data-i18n="meta_type">PROGRAMA</span>
+      <span id="p-type" class="strip-val">RESIDENCIAL</span>
+    </div>
+    <div class="strip-col">
+      <span class="strip-key" data-i18n="meta_status">ESTADO</span>
+      <span id="p-status" class="strip-val">CONSTRUIDO</span>
+    </div>
+    <div class="strip-col">
+      <span class="strip-key" data-i18n="meta_photography">FOTOGRAFÍA</span>
+      <span id="p-photo" class="strip-val">RAFAEL GAMO</span>
+    </div>
+  </div>
+</div>

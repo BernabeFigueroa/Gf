@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>GIOVANNI FRONTINI — Architecture & Spatial Design</title>
+  <meta name="description" content="Editorial architecture and spatial design portfolio for Giovanni Frontini. Residential, retail, and cultural architecture.">
+
+  <!-- Preload Custom Editorial Font -->
+  <link rel="preload" href="./font/Patinio Basica.ttf" as="font" type="font/ttf" crossorigin>
+
+  <!-- Fallback & Micro-copy Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light text-primary select-none antialiased">
+
+  <!-- Custom Floating Mouse Follower for Desktop -->
+  <div id="custom-cursor" class="custom-cursor">
+    <div class="cursor-content">
+      <span id="cursor-title" class="cursor-title">CASA PEDREGAL</span>
+      <span id="cursor-sub" class="cursor-sub">RESIDENTIAL — 2024</span>
+    </div>
+  </div>
+
+  <!-- FIXED TOP HEADER -->
+  <header class="fixed-top-header">
+    <a href="#home" class="brand-title" id="brand-logo" onclick="navigateTo('home'); return false;">
+      GIOVANNI FRONTINI
+    </a>
+    <div id="header-tagline" class="header-tagline">ideas into spaces</div>
+  </header>
+
+  <!-- MAIN GLOBAL VIEW CONTAINER -->
+  <main id="app-container" class="app-viewport">
+
+    <!-- VIEW 1: HOME FULL-BLEED SLIDESHOW -->
+    <section id="view-home" class="view-panel active">
+      <div id="slideshow-track" class="slideshow-track">
+        <!-- Slides dynamically rendered by JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: CATEGORY / GRID VIEW (ARQUITECTURA & INTERIORES, ALL PROJECTS) -->
+    <section id="view-grid" class="view-panel">
+      <div id="projects-grid" class="editorial-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 2B: MÁRMOL SHOWCASE (Marmolería, mesas, mesadas y video de taller) -->
+    <section id="view-marmol" class="view-panel">
+      <div class="marmol-viewport">
+        <header class="marmol-header">
+          <span class="mono-label" data-i18n="marmol_badge">[ MARMOLERÍA FRONTINI ]</span>
+          <h2 class="marmol-title" data-i18n="marmol_title">MATERIA, PRECISIÓN & CANTERA</h2>
+          <p class="marmol-subtitle" data-i18n="marmol_subtitle">Mesas monolíticas, mesadas a medida y transformaciones en piedra natural seleccionada.</p>
+        </header>
+
+        <div id="marmol-grid" class="marmol-grid">
+          <!-- Rendered via JS dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: PROJECT DETAIL VIEW -->
+    <section id="view-project" class="view-panel">
+      <!-- Desktop: Horizontal Multi-Image Carousel | Mobile: Stacked Vertical -->
+      <div class="project-view-wrapper">
+        <div id="project-gallery-track" class="project-gallery-track">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Horizontal Scroll Progress Bar (Expands outward from center) -->
+      <div class="project-progress-container">
+        <div id="project-progress-bar" class="project-progress-bar"></div>
+      </div>
+
+      <!-- Slide Indicator Dot above metadata strip (as seen in Pactoestudio) -->
+      <div class="project-dot-indicator"></div>
+
+      <!-- Desktop Bottom Project Metadata Strip (Pactoestudio layout: Title Left + Columns Right) -->
+      <div id="desktop-project-strip" class="desktop-project-strip">
+        <div class="strip-brand-title">
+          <h2 id="p-name" class="p-title-display">CASA PEDREGAL</h2>
+        </div>
+        <div class="strip-columns-group">
+          <div class="strip-col">
+            <span class="strip-key" data-i18n="meta_year">AÑO</span>
+            <span id="p-year" class="strip-val">2024</span>
+          </div>
+          <div class="strip-col">
+            <span class="strip-key" data-i18n="meta_location">UBICACIÓN</span>
+            <span id="p-loc" class="strip-val">MEXICO CITY, MX</span>
+          </div>
+          <div class="strip-col">
+            <span class="strip-key" data-i18n="meta_surface">SUPERFICIE</span>
+            <span id="p-surf" class="strip-val">680 M²</span>
+          </div>
+          <div class="strip-col">
+            <span class="strip-key" data-i18n="meta_type">PROGRAMA</span>
+            <span id="p-type" class="strip-val">RESIDENCIAL</span>
+          </div>
+          <div class="strip-col">
+            <span class="strip-key" data-i18n="meta_status">ESTADO</span>
+            <span id="p-status" class="strip-val">CONSTRUIDO</span>
+          </div>
+          <div class="strip-col">
+            <span class="strip-key" data-i18n="meta_photography">FOTOGRAFÍA</span>
+            <span id="p-photo" class="strip-val">RAFAEL GAMO</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Floating CTA: DETAILS -->
+      <div class="mobile-cta-wrapper">
+        <button id="btn-open-drawer" class="mobile-details-btn" data-action="open-drawer">
+          <span id="btn-text-lang" data-i18n="details_btn">DETALLES</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- VIEW 4: ABOUT PAGE -->
+    <section id="view-about" class="view-panel">
+      <div class="about-container">
+        <div class="about-image-column">
+          <img id="about-portrait-img" src="/images/arquitecto/giovanni-frontini.webp" alt="Giovanni Frontini" class="about-portrait" loading="lazy">
+          <div class="portrait-caption mono-label" data-i18n="portrait_caption">GIOVANNI FRONTINI — FUNDADOR Y ARQUITECTO PRINCIPAL</div>
+        </div>
+        <div class="about-text-column">
+          <div class="about-section">
+            <h2 class="editorial-heading" id="about-manifesto-title">DISCIPLINA Y SILENCIO</h2>
+            <p class="editorial-body" id="about-bio-p1">
+              Giovanni Frontini opera en la intersección de la pureza tectónica, la materialidad mineral cruda y la luz coreografiada. El estudio concibe la arquitectura y el diseño de interiores no como una imposición formal, sino como un diálogo riguroso entre la materia noble, el espacio y la luz natural.
+            </p>
+            <p class="editorial-body" id="about-bio-p2">
+              Elaboración, diseño y colocación de piedra natural, mármol, granito, cuarzo y piedra sinterizada. Asesoramiento y presupuesto sin cargo para proyectos residenciales y comerciales.
+            </p>
+          </div>
+
+          <div class="about-meta-grid">
+            <div class="meta-block">
+              <span class="mono-label" data-i18n="label_studio">ESTUDIO & TALLER</span>
+              <p class="meta-info" id="about-studio-info">JUAN GORENA 1571<br>CONCEPCIÓN, TUCUMÁN<br>ARGENTINA (CP 4146)</p>
+            </div>
+            <div class="meta-block">
+              <span class="mono-label" data-i18n="label_services">ESPECIALIDAD & ASESORAMIENTO</span>
+              <p class="meta-info" id="about-services-info">PIEDRA NATURAL, MÁRMOL, GRANITO, CUARZO & PIEDRA SINTERIZADA.<br>ASESORAMIENTO Y PRESUPUESTO SIN CARGO.</p>
+            </div>
+            <div class="meta-block">
+              <span class="mono-label" data-i18n="label_inquiries">CONSULTAS</span>
+              <p class="meta-info"><a href="mailto:studio@giovannifrontini.com" class="editorial-link">STUDIO@GIOVANNIFRONTINI.COM</a><br>+54 9 3865 000000</p>
+            </div>
+            <div class="meta-block">
+              <span class="mono-label" data-i18n="label_social">REDES</span>
+              <p class="meta-info"><a href="https://www.instagram.com/marmoleriafrontini/" target="_blank" rel="noopener" class="editorial-link" id="about-instagram-link">@MARMOLERIAFRONTINI</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOBILE BOTTOM SHEET DRAWER (Project Specs & Architectural Brief) -->
+  <div id="mobile-drawer-overlay" class="drawer-overlay" data-action="close-drawer"></div>
+  <div id="mobile-drawer" class="bottom-sheet-drawer">
+    <div class="drawer-drag-bar" data-action="close-drawer">
+      <div class="drag-indicator"></div>
+    </div>
+    <div class="drawer-inner-content">
+      <div class="drawer-header">
+        <h3 id="drawer-project-title" class="drawer-title">CASA PEDREGAL</h3>
+        <button class="drawer-close-btn mono-label" data-action="close-drawer" data-i18n="drawer_close">[ CERRAR ✕ ]</button>
+      </div>
+
+      <div class="drawer-specs-grid">
+        <div class="spec-row"><span class="mono-label" data-i18n="meta_year">AÑO</span><span id="d-year" class="spec-value">2024</span></div>
+        <div class="spec-row"><span class="mono-label" data-i18n="meta_location">UBICACIÓN</span><span id="d-loc" class="spec-value">MEXICO CITY, MX</span></div>
+        <div class="spec-row"><span class="mono-label" data-i18n="meta_surface">SUPERFICIE</span><span id="d-surf" class="spec-value">680 M²</span></div>
+        <div class="spec-row"><span class="mono-label" data-i18n="meta_type">PROGRAMA</span><span id="d-type" class="spec-value">ARQUITECTURA & INTERIORES</span></div>
+        <div class="spec-row"><span class="mono-label" data-i18n="meta_status">ESTADO</span><span id="d-status" class="spec-value">BUILT</span></div>
+        <div class="spec-row"><span class="mono-label" data-i18n="meta_photography">FOTOGRAFÍA</span><span id="d-photo" class="spec-value">GIOVANNI FRONTINI</span></div>
+      </div>
+
+      <div class="drawer-description">
+        <span class="mono-label" data-i18n="drawer_brief_label">[ MEMORIA DESCRIPTIVA ]</span>
+        <p id="drawer-project-desc" class="editorial-body text-sm mt-2">
+          An earthen monolith embedded into volcanic basalt rock. The structure organizes domestic rituals around an open sky patio, carving shadows through double-height board-formed concrete and end-grain charred pine partitions.
+        </p>
+      </div>
+
+      <div class="drawer-contact-action">
+        <a href="mailto:studio@giovannifrontini.com?subject=Project%20Inquiry" class="drawer-action-btn mono-label" data-i18n="drawer_inquire">
+          [ CONSULTAR POR ESTE PROYECTO ↗ ]
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIXED BOTTOM NAVIGATION BAR (PACTOESTUDIO INSPIRED) -->
+  <nav class="fixed-bottom-nav">
+    <!-- Left Navigation Edge -->
+    <div class="nav-left">
+      <button class="nav-tab active" data-target="home" data-action="nav-home" data-i18n="nav_home">INICIO</button>
+      <button class="nav-tab" data-target="arquitectura" data-action="filter-arquitectura" data-i18n="nav_arquitectura">ARQUITECTURA & INTERIORES</button>
+      <button class="nav-tab" data-target="marmol" data-action="filter-marmol" data-i18n="nav_marmol">MÁRMOL</button>
+    </div>
+
+    <!-- Right Navigation Edge -->
+    <div class="nav-right">
+      <button class="nav-tab" data-target="projects" data-action="filter-all" data-i18n="nav_projects">PROYECTOS</button>
+      <button class="nav-tab" data-target="about" data-action="nav-about" data-i18n="nav_about">SOBRE MÍ</button>
+      <a href="https://www.instagram.com/marmoleriafrontini/" target="_blank" rel="noopener" class="nav-icon-link" aria-label="Instagram">
+        <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+      <a href="mailto:studio@giovannifrontini.com" class="nav-icon-link" aria-label="Email">
+        <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+      <button id="lang-toggle-btn" class="nav-tab-square lang-box" data-action="toggle-lang">ES</button>
+      <button class="nav-theme-dot" data-action="toggle-theme" aria-label="Cambiar paleta de colores" title="Cambiar paleta de colores"></button>
+    </div>
+
+    <!-- Mobile Bottom Bar: Botón de Correo a la izquierda y Botón Hamburguesa a la derecha -->
+    <div class="mobile-bottom-bar mobile-only">
+      <a href="mailto:studio@giovannifrontini.com" class="mobile-nav-btn mail-icon-btn" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mobile-bottom-svg">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+
+      <button class="mobile-nav-btn hamburger-btn" data-action="open-mobile-menu" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-bottom-svg">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Fullscreen Blur Navigation Modal -->
+  <div id="mobile-nav-modal" class="mobile-nav-modal" aria-hidden="true">
+    <div class="modal-header">
+      <a href="#home" class="brand-title modal-brand" data-action="nav-home">
+        GIOVANNI FRONTINI
+      </a>
+    </div>
+
+    <div class="modal-links-container">
+      <button class="modal-nav-link active" data-target="home" data-action="nav-home" data-i18n="nav_home">INICIO</button>
+      <button class="modal-nav-link" data-target="arquitectura" data-action="filter-arquitectura" data-i18n="nav_arquitectura">ARQUITECTURA & INTERIORES</button>
+      <button class="modal-nav-link" data-target="marmol" data-action="filter-marmol" data-i18n="nav_marmol">MÁRMOL</button>
+      <button class="modal-nav-link" data-target="projects" data-action="filter-all" data-i18n="nav_projects">PROYECTOS</button>
+      <button class="modal-nav-link" data-target="about" data-action="nav-about" data-i18n="nav_about">SOBRE MÍ</button>
+
+      <div class="modal-controls-group">
+        <a href="https://www.instagram.com/marmoleriafrontini/" target="_blank" rel="noopener" class="modal-icon-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="modal-svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <button id="modal-lang-btn" class="modal-lang-pill" data-action="toggle-lang">ES</button>
+        <button class="modal-theme-toggle" data-action="toggle-theme" aria-label="Cambiar tema de color">
+          <div class="theme-switch-knob"></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="modal-bottom-bar">
+      <a href="mailto:studio@giovannifrontini.com" class="mobile-nav-btn mail-icon-btn" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mobile-bottom-svg">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+
+      <button class="mobile-nav-btn close-menu-btn" data-action="close-mobile-menu" aria-label="Cerrar menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-bottom-svg">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

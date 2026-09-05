@@ -1,0 +1,37 @@
+---
+// MobileDrawer.astro - Drawer inferior táctil para smartphones
+---
+<div id="mobile-drawer-overlay" class="drawer-overlay" data-action="close-drawer"></div>
+<div id="mobile-drawer" class="bottom-sheet-drawer">
+  <div class="drawer-drag-bar" data-action="close-drawer">
+    <div class="drag-indicator"></div>
+  </div>
+  <div class="drawer-inner-content">
+    <div class="drawer-header">
+      <h3 id="drawer-project-title" class="drawer-title">CASA PEDREGAL</h3>
+      <button class="drawer-close-btn mono-label" data-action="close-drawer" data-i18n="drawer_close">[ CERRAR ✕ ]</button>
+    </div>
+
+    <div class="drawer-specs-grid">
+      <div class="spec-row"><span class="mono-label" data-i18n="meta_year">AÑO</span><span id="d-year" class="spec-value">2024</span></div>
+      <div class="spec-row"><span class="mono-label" data-i18n="meta_location">UBICACIÓN</span><span id="d-loc" class="spec-value">MEXICO CITY, MX</span></div>
+      <div class="spec-row"><span class="mono-label" data-i18n="meta_surface">SUPERFICIE</span><span id="d-surf" class="spec-value">680 M²</span></div>
+      <div class="spec-row"><span class="mono-label" data-i18n="meta_type">PROGRAMA</span><span id="d-type" class="spec-value">RESIDENCIAL</span></div>
+      <div class="spec-row"><span class="mono-label" data-i18n="meta_status">ESTADO</span><span id="d-status" class="spec-value">CONSTRUIDO</span></div>
+      <div class="spec-row"><span class="mono-label" data-i18n="meta_photography">FOTOGRAFÍA</span><span id="d-photo" class="spec-value">RAFAEL GAMO</span></div>
+    </div>
+
+    <div class="drawer-description">
+      <span class="mono-label" data-i18n="drawer_brief_label">[ MEMORIA DESCRIPTIVA ]</span>
+      <p id="drawer-project-desc" class="editorial-body text-sm mt-2">
+        An earthen monolith embedded into volcanic basalt rock. The structure organizes domestic rituals around an open sky patio, carving shadows through double-height board-formed concrete and end-grain charred pine partitions.
+      </p>
+    </div>
+
+    <div class="drawer-contact-action">
+      <a href="mailto:studio@giovannifrontini.com?subject=Project%20Inquiry" class="drawer-action-btn mono-label" data-i18n="drawer_inquire">
+        [ CONSULTAR POR ESTE PROYECTO ↗ ]
+      </a>
+    </div>
+  </div>
+</div>
