@@ -63,13 +63,24 @@ function prefixProjectImages(project) {
   return p;
 }
 
+function prefixMarmolItem(item) {
+  if (!item) return item;
+  const m = { ...item };
+  if (m.image) m.image = prefixPath(m.image);
+  if (m.image_before) m.image_before = prefixPath(m.image_before);
+  if (m.image_after) m.image_after = prefixPath(m.image_after);
+  if (m.video) m.video = prefixPath(m.video);
+  if (m.thumbnail) m.thumbnail = prefixPath(m.thumbnail);
+  return m;
+}
+
 async function loadProjectsData() {
   try {
     const response = await fetch(`${BASE_URL}/projects.json`);
     if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
     const data = await response.json();
     ARCHITECTURE_DATA = (data.projects || []).map(prefixProjectImages);
-    MARMOL_DATA = (data.marmol || []).map(prefixProjectImages);
+    MARMOL_DATA = (data.marmol || []).map(prefixMarmolItem);
     CONTENT_I18N = data.about || {};
     if (CONTENT_I18N.portraitImage) {
       CONTENT_I18N.portraitImage = prefixPath(CONTENT_I18N.portraitImage);
@@ -899,6 +910,11 @@ function updateAboutContent() {
   if (igLink && CONTENT_I18N.instagram) {
     igLink.href = CONTENT_I18N.instagram;
     igLink.textContent = CONTENT_I18N.instagram_handle || '@MARMOLERIAFRONTINI';
+  }
+
+  const portraitImg = document.getElementById('about-portrait-img');
+  if (portraitImg && CONTENT_I18N.portraitImage) {
+    portraitImg.src = CONTENT_I18N.portraitImage;
   }
 }
 
