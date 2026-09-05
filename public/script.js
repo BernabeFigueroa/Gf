@@ -4,6 +4,18 @@
  * Declarative DOM Listeners, Smooth Momentum Scroll & Responsive Drawer.
  */
 
+// Base URL: detectado automáticamente para GitHub Pages (/Gf/) o raíz local (/)
+const BASE_URL = (() => {
+  const scripts = document.querySelectorAll('script[src]');
+  for (const s of scripts) {
+    const src = s.getAttribute('src');
+    if (src && src.endsWith('/script.js')) {
+      return src.replace('/script.js', '');
+    }
+  }
+  return '';
+})();
+
 // Application State
 let ARCHITECTURE_DATA = [];
 let MARMOL_DATA = [];
@@ -34,14 +46,34 @@ const brandLogo = document.getElementById('brand-logo');
 /* --------------------------------------------------------------------------
    1. DATA LAYER (SSOT: /projects.json)
    -------------------------------------------------------------------------- */
+
+// Prefija paths absolutos con BASE_URL para compatibilidad con GitHub Pages subdirectory
+function prefixPath(path) {
+  if (!path || !path.startsWith('/')) return path;
+  return `${BASE_URL}${path}`;
+}
+
+function prefixProjectImages(project) {
+  if (!project) return project;
+  const p = { ...project };
+  if (p.heroImage) p.heroImage = prefixPath(p.heroImage);
+  if (p.heroVideo) p.heroVideo = prefixPath(p.heroVideo);
+  if (Array.isArray(p.homeImages)) p.homeImages = p.homeImages.map(prefixPath);
+  if (Array.isArray(p.gallery)) p.gallery = p.gallery.map(prefixPath);
+  return p;
+}
+
 async function loadProjectsData() {
   try {
-    const response = await fetch('/projects.json');
+    const response = await fetch(`${BASE_URL}/projects.json`);
     if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
     const data = await response.json();
-    ARCHITECTURE_DATA = data.projects || [];
-    MARMOL_DATA = data.marmol || [];
+    ARCHITECTURE_DATA = (data.projects || []).map(prefixProjectImages);
+    MARMOL_DATA = (data.marmol || []).map(prefixProjectImages);
     CONTENT_I18N = data.about || {};
+    if (CONTENT_I18N.portraitImage) {
+      CONTENT_I18N.portraitImage = prefixPath(CONTENT_I18N.portraitImage);
+    }
   } catch (err) {
     console.error('Critical: Failed to load portfolio data:', err);
     ARCHITECTURE_DATA = [];
