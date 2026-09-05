@@ -31,44 +31,17 @@ const cursorSub = document.getElementById('cursor-sub');
 const slideshowTrack = document.getElementById('slideshow-track');
 const brandLogo = document.getElementById('brand-logo');
 
-// Dynamic Base Path Detection (works locally and under GitHub Pages subdirectories like /Gf/)
-const BASE_PATH = window.location.pathname.startsWith('/Gf') ? '/Gf' : '';
-function resolvePath(path) {
-  if (!path || typeof path !== 'string') return path;
-  if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('mailto:')) return path;
-  if (path.startsWith('/')) return `${BASE_PATH}${path}`;
-  return `${BASE_PATH}/${path}`;
-}
-
 /* --------------------------------------------------------------------------
-   1. DATA LAYER (SSOT: projects.json)
+   1. DATA LAYER (SSOT: /projects.json)
    -------------------------------------------------------------------------- */
 async function loadProjectsData() {
   try {
-    const response = await fetch(resolvePath('/projects.json'));
+    const response = await fetch('/projects.json');
     if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
     const data = await response.json();
-    ARCHITECTURE_DATA = (data.projects || []).map(p => ({
-      ...p,
-      heroImage: resolvePath(p.heroImage),
-      heroVideo: p.heroVideo ? resolvePath(p.heroVideo) : null,
-      homeImages: (p.homeImages || []).map(resolvePath),
-      gallery: (p.gallery || []).map(resolvePath)
-    }));
-
-    MARMOL_DATA = (data.marmol || []).map(m => ({
-      ...m,
-      image: m.image ? resolvePath(m.image) : null,
-      video: m.video ? resolvePath(m.video) : null,
-      thumbnail: m.thumbnail ? resolvePath(m.thumbnail) : null,
-      image_before: m.image_before ? resolvePath(m.image_before) : null,
-      image_after: m.image_after ? resolvePath(m.image_after) : null
-    }));
-
+    ARCHITECTURE_DATA = data.projects || [];
+    MARMOL_DATA = data.marmol || [];
     CONTENT_I18N = data.about || {};
-    if (CONTENT_I18N.portraitImage) {
-      CONTENT_I18N.portraitImage = resolvePath(CONTENT_I18N.portraitImage);
-    }
   } catch (err) {
     console.error('Critical: Failed to load portfolio data:', err);
     ARCHITECTURE_DATA = [];
