@@ -7,7 +7,7 @@
   <meta name="description" content="Editorial architecture and spatial design portfolio for Giovanni Frontini. Residential, retail, and cultural architecture.">
 
   <!-- Preload Custom Editorial Font -->
-  <link rel="preload" href="./font/Patinio Basica.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/Gf/font/Patinio Basica.ttf" as="font" type="font/ttf" crossorigin>
 
   <!-- Fallback & Micro-copy Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,17 +51,40 @@
       </div>
     </section>
 
-    <!-- VIEW 2B: MÁRMOL SHOWCASE (Marmolería, mesas, mesadas y video de taller) -->
+    <!-- VIEW 2B: MÁRMOL SHOWCASE (Marmolería Frontini & Arquitectura en Piedra) -->
     <section id="view-marmol" class="view-panel">
       <div class="marmol-viewport">
         <header class="marmol-header">
-          <span class="mono-label" data-i18n="marmol_badge">[ MARMOLERÍA FRONTINI ]</span>
-          <h2 class="marmol-title" data-i18n="marmol_title">MATERIA, PRECISIÓN & CANTERA</h2>
-          <p class="marmol-subtitle" data-i18n="marmol_subtitle">Mesas monolíticas, mesadas a medida y transformaciones en piedra natural seleccionada.</p>
+          <span class="mono-label" data-i18n="marmol_badge">[ MARMOLERÍA FRONTINI — EST. 1949 ]</span>
+          <h2 class="marmol-title" data-i18n="marmol_title">STONE AS ARCHITECTURE</h2>
+          
+          <blockquote class="marmol-quote" data-i18n="marmol_quote">
+            “I DON’T JUST SPECIFY STONE. I DESIGN WITH IT”
+          </blockquote>
+
+          <p class="marmol-body" data-i18n="marmol_body">
+            Stone is incorporated into my projects as architecture, furniture and detail — from monolithic tables and sculptural vanities to kitchens, bars, walls and bespoke elements.
+          </p>
         </header>
 
         <div id="marmol-grid" class="marmol-grid">
           <!-- Rendered via JS dynamically -->
+        </div>
+
+        <div class="marmol-footer-block">
+          <div class="marmol-heritage-text">
+            <span class="marmol-heritage-brand" data-i18n="marmol_heritage_brand">MARMOLERÍA FRONTINI</span>
+            <span class="marmol-heritage-sub" data-i18n="marmol_heritage_sub">Stone fabrication & craftsmanship since 1949.</span>
+          </div>
+          <a 
+            href="https://www.instagram.com/marmoleriafrontini/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="marmol-ig-btn"
+            data-i18n="marmol_ig_btn"
+          >
+            @MARMOLERIAFRONTINI ↗
+          </a>
         </div>
       </div>
     </section>
@@ -129,35 +152,54 @@
       <div class="about-container">
         <div class="about-image-column">
           <img id="about-portrait-img" src="images/arquitecto/giovanni-frontini.webp" alt="Giovanni Frontini" class="about-portrait" loading="lazy">
-          <div class="portrait-caption mono-label" data-i18n="portrait_caption">GIOVANNI FRONTINI — FUNDADOR Y ARQUITECTO PRINCIPAL</div>
+          <div class="portrait-caption">
+            <div class="portrait-signature-name">GIOVANNI FRONTINI</div>
+            <div class="portrait-signature-role">Architect · Interior Designer · Designer</div>
+            <div class="portrait-signature-location">Tucumán, Argentina</div>
+          </div>
         </div>
         <div class="about-text-column">
           <div class="about-section">
-            <h2 class="editorial-heading" id="about-manifesto-title">DISCIPLINA Y SILENCIO</h2>
+            <h2 class="editorial-heading about-name-title" id="about-manifesto-title">GIOVANNI FRONTINI</h2>
+            <div class="about-subtitle" id="about-subtitle">Architect & Interior Designer</div>
+            
             <p class="editorial-body" id="about-bio-p1">
-              Giovanni Frontini opera en la intersección de la pureza tectónica, la materialidad mineral cruda y la luz coreografiada. El estudio concibe la arquitectura y el diseño de interiores no como una imposición formal, sino como un diálogo riguroso entre la materia noble, el espacio y la luz natural.
+              I am an architect and interior designer focused on creating spaces where architecture, materiality and identity come together.
             </p>
             <p class="editorial-body" id="about-bio-p2">
-              Elaboración, diseño y colocación de piedra natural, mármol, granito, cuarzo y piedra sinterizada. Asesoramiento y presupuesto sin cargo para proyectos residenciales y comerciales.
+              My work explores the relationship between space, proportion, texture and light, with a particular interest in natural materials and their ability to shape the character of an environment.
             </p>
+            <p class="editorial-body" id="about-bio-p3">
+              With a background in architecture and a strong connection to stone fabrication, I approach each project from both a design and material perspective — from the overall concept to the smallest detail.
+            </p>
+
+            <blockquote class="about-quote" id="about-quote">
+              “Idea is not simply selecting materials, but understanding them, transforming them and incorporating them into the architecture”
+            </blockquote>
+
+            <div class="about-divider">⸻</div>
+
+            <div class="about-disciplines" id="about-disciplines">ARCHITECTURE / INTERIORS / MATERIAL</div>
+            <p class="about-presence" id="about-presence">Based in Argentina, working across residential, commercial and hospitality projects.</p>
+
+            <div class="about-divider">⸻</div>
           </div>
 
           <div class="about-meta-grid">
             <div class="meta-block">
-              <span class="mono-label" data-i18n="label_studio">ESTUDIO & TALLER</span>
-              <p class="meta-info" id="about-studio-info">JUAN GORENA 1571<br>CONCEPCIÓN, TUCUMÁN<br>ARGENTINA (CP 4146)</p>
-            </div>
-            <div class="meta-block">
-              <span class="mono-label" data-i18n="label_services">ESPECIALIDAD & ASESORAMIENTO</span>
-              <p class="meta-info" id="about-services-info">PIEDRA NATURAL, MÁRMOL, GRANITO, CUARZO & PIEDRA SINTERIZADA.<br>ASESORAMIENTO Y PRESUPUESTO SIN CARGO.</p>
+              <span class="mono-label" data-i18n="label_studio">ESTUDIO</span>
+              <p class="meta-info" id="about-studio-info">JUAN GORENA 1610<br>CONCEPCIÓN, TUCUMÁN<br>ARGENTINA (CP 4146)</p>
             </div>
             <div class="meta-block">
               <span class="mono-label" data-i18n="label_inquiries">CONSULTAS</span>
-              <p class="meta-info"><a href="mailto:studio@giovannifrontini.com" class="editorial-link">STUDIO@GIOVANNIFRONTINI.COM</a><br>+54 9 3865 000000</p>
+              <p class="meta-info">
+                <a href="mailto:Giovanifrontini@gmail.com" class="editorial-link">GIOVANIFRONTINI@GMAIL.COM</a><br>
+                <a href="https://wa.me/5493816382147" target="_blank" rel="noopener" class="editorial-link">+54 9 3816382147</a>
+              </p>
             </div>
             <div class="meta-block">
               <span class="mono-label" data-i18n="label_social">REDES</span>
-              <p class="meta-info"><a href="https://www.instagram.com/marmoleriafrontini/" target="_blank" rel="noopener" class="editorial-link" id="about-instagram-link">@MARMOLERIAFRONTINI</a></p>
+              <p class="meta-info"><a href="https://www.instagram.com/giovannifrontini/" target="_blank" rel="noopener" class="editorial-link" id="about-instagram-link">@GIOVANNIFRONTINI</a></p>
             </div>
           </div>
         </div>
@@ -206,14 +248,14 @@
   <nav class="fixed-bottom-nav">
     <!-- Left Navigation Edge -->
     <div class="nav-left">
-      <button class="nav-tab active" data-target="home" data-action="nav-home" data-i18n="nav_home">INICIO</button>
-      <button class="nav-tab" data-target="arquitectura" data-action="filter-arquitectura" data-i18n="nav_arquitectura">ARQUITECTURA & INTERIORES</button>
+      <button class="nav-tab active" data-target="home" data-action="nav-home" data-i18n="nav_home">ARQUITECTURA & INTERIORES</button>
+      <button class="nav-tab" data-target="comercial" data-action="filter-comercial" data-i18n="nav_comercial">COMERCIAL</button>
+      <button class="nav-tab" data-target="residencial" data-action="filter-residencial" data-i18n="nav_residencial">RESIDENCIAL</button>
       <button class="nav-tab" data-target="marmol" data-action="filter-marmol" data-i18n="nav_marmol">MÁRMOL</button>
     </div>
 
     <!-- Right Navigation Edge -->
     <div class="nav-right">
-      <button class="nav-tab" data-target="projects" data-action="filter-all" data-i18n="nav_projects">PROYECTOS</button>
       <button class="nav-tab" data-target="about" data-action="nav-about" data-i18n="nav_about">SOBRE MÍ</button>
       <a href="https://www.instagram.com/marmoleriafrontini/" target="_blank" rel="noopener" class="nav-icon-link" aria-label="Instagram">
         <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -222,24 +264,24 @@
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
         </svg>
       </a>
-      <a href="mailto:studio@giovannifrontini.com" class="nav-icon-link" aria-label="Email">
+      <button class="nav-icon-link" data-action="open-contact-modal" aria-label="Contacto / Mensaje">
         <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <rect x="2" y="4" width="20" height="16" rx="2"></rect>
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
         </svg>
-      </a>
+      </button>
       <button id="lang-toggle-btn" class="nav-tab-square lang-box" data-action="toggle-lang">ES</button>
       <button class="nav-theme-dot" data-action="toggle-theme" aria-label="Cambiar paleta de colores" title="Cambiar paleta de colores"></button>
     </div>
 
     <!-- Mobile Bottom Bar: Botón de Correo a la izquierda y Botón Hamburguesa a la derecha -->
     <div class="mobile-bottom-bar mobile-only">
-      <a href="mailto:studio@giovannifrontini.com" class="mobile-nav-btn mail-icon-btn" aria-label="Email">
+      <button class="mobile-nav-btn mail-icon-btn" data-action="open-contact-modal" aria-label="Contacto / Mensaje">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mobile-bottom-svg">
           <rect x="2" y="4" width="20" height="16" rx="2"></rect>
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
         </svg>
-      </a>
+      </button>
 
       <button class="mobile-nav-btn hamburger-btn" data-action="open-mobile-menu" aria-label="Abrir menú">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-bottom-svg">
@@ -260,10 +302,10 @@
     </div>
 
     <div class="modal-links-container">
-      <button class="modal-nav-link active" data-target="home" data-action="nav-home" data-i18n="nav_home">INICIO</button>
-      <button class="modal-nav-link" data-target="arquitectura" data-action="filter-arquitectura" data-i18n="nav_arquitectura">ARQUITECTURA & INTERIORES</button>
+      <button class="modal-nav-link active" data-target="home" data-action="nav-home" data-i18n="nav_home">ARQUITECTURA & INTERIORES</button>
+      <button class="modal-nav-link" data-target="comercial" data-action="filter-comercial" data-i18n="nav_comercial">COMERCIAL</button>
+      <button class="modal-nav-link" data-target="residencial" data-action="filter-residencial" data-i18n="nav_residencial">RESIDENCIAL</button>
       <button class="modal-nav-link" data-target="marmol" data-action="filter-marmol" data-i18n="nav_marmol">MÁRMOL</button>
-      <button class="modal-nav-link" data-target="projects" data-action="filter-all" data-i18n="nav_projects">PROYECTOS</button>
       <button class="modal-nav-link" data-target="about" data-action="nav-about" data-i18n="nav_about">SOBRE MÍ</button>
 
       <div class="modal-controls-group">
@@ -282,12 +324,12 @@
     </div>
 
     <div class="modal-bottom-bar">
-      <a href="mailto:studio@giovannifrontini.com" class="mobile-nav-btn mail-icon-btn" aria-label="Email">
+      <button class="mobile-nav-btn mail-icon-btn" data-action="open-contact-modal" aria-label="Contacto / Mensaje">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mobile-bottom-svg">
           <rect x="2" y="4" width="20" height="16" rx="2"></rect>
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
         </svg>
-      </a>
+      </button>
 
       <button class="mobile-nav-btn close-menu-btn" data-action="close-mobile-menu" aria-label="Cerrar menú">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-bottom-svg">
@@ -295,6 +337,89 @@
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
+    </div>
+  </div>
+
+  <!-- Contact & WhatsApp Modal -->
+  <div id="contact-modal" class="contact-modal" aria-hidden="true">
+    <div class="contact-modal-backdrop" data-action="close-contact-modal"></div>
+    
+    <div class="contact-modal-window" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+      <div class="contact-modal-header">
+        <div class="contact-modal-tag" data-i18n="contact_modal_tag">[ INICIAR PROYECTO ]</div>
+        <button class="contact-close-btn" data-action="close-contact-modal" aria-label="Cerrar modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-close-svg">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="contact-modal-body">
+        <h3 id="contact-modal-title" class="contact-title" data-i18n="contact_modal_title">HABLEMOS DE TU PROYECTO</h3>
+        <p class="contact-subtitle" data-i18n="contact_modal_subtitle">
+          Completá tus datos para enviarnos tu consulta directamente a WhatsApp.
+        </p>
+
+        <form id="contact-wsp-form" class="contact-form" autocomplete="off">
+          <div class="contact-form-row">
+            <div class="contact-field-group">
+              <label for="contact-nombre" class="contact-label" data-i18n="contact_label_name">NOMBRE *</label>
+              <input 
+                type="text" 
+                id="contact-nombre" 
+                name="nombre" 
+                class="contact-input" 
+                placeholder="Ej. Juan" 
+                required 
+              />
+            </div>
+
+            <div class="contact-field-group">
+              <label for="contact-apellido" class="contact-label" data-i18n="contact_label_lastname">APELLIDO *</label>
+              <input 
+                type="text" 
+                id="contact-apellido" 
+                name="apellido" 
+                class="contact-input" 
+                placeholder="Ej. Pérez" 
+                required 
+              />
+            </div>
+          </div>
+
+          <div class="contact-field-group">
+            <label for="contact-numero" class="contact-label" data-i18n="contact_label_phone">NÚMERO DE TELÉFONO</label>
+            <input 
+              type="tel" 
+              id="contact-numero" 
+              name="numero" 
+              class="contact-input" 
+              placeholder="Ej. +54 9 381 000000" 
+            />
+          </div>
+
+          <div class="contact-field-group">
+            <label for="contact-mensaje" class="contact-label" data-i18n="contact_label_message">¿QUÉ TENÉS EN MENTE? *</label>
+            <textarea 
+              id="contact-mensaje" 
+              name="mensaje" 
+              rows="4" 
+              class="contact-textarea" 
+              placeholder="Contanos sobre tu idea, proyecto o espacio a transformar..." 
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="contact-submit-btn">
+            <span class="contact-btn-text" data-i18n="contact_btn_send">ENVIAR A WHATSAPP</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-btn-arrow">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 

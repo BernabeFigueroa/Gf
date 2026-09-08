@@ -1,0 +1,91 @@
+/* ==========================================================================
+   GIOVANNI FRONTINI — DESIGN TOKENS & FONTS
+   ========================================================================== */
+
+@font-face {
+  font-family: 'PatinioBasica';
+  src: url('/Gf/font/Patinio Basica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Patinio Basica';
+  src: url('/Gf/font/Patinio Basica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* --- PALETA OFICIAL GIOVANNI FRONTINI --- */
+  /* Chocolate Plum */
+  --cp-50: #f5f0f0;
+  --cp-100: #eae1e1;
+  --cp-200: #d5c3c3;
+  --cp-300: #c0a6a5;
+  --cp-400: #ab8887;
+  --cp-500: #966a69;
+  --cp-600: #785554;
+  --cp-700: #5a403f;
+  --cp-800: #3c2a2a;
+  --cp-900: #1e1515;
+  --cp-950: #150f0f;
+
+  /* Coffee Bean */
+  --cb-50: #f8eded;
+  --cb-100: #f0dcdb;
+  --cb-200: #e2b8b6;
+  --cb-300: #d39592;
+  --cb-400: #c5726d;
+  --cb-500: #b64e49;
+  --cb-600: #923f3a;
+  --cb-700: #6d2f2c;
+  --cb-800: #491f1d;
+  --cb-900: #24100f;
+  --cb-950: #1a0b0a;
+
+  /* Cotton Rose */
+  --cr-50: #f8eded;
+  --cr-100: #f0dbdb;
+  --cr-200: #e2b8b6;
+  --cr-300: #d39492;
+  --cr-400: #c5706d;
+  --cr-500: #b64c49;
+  --cr-600: #923d3a;
+  --cr-700: #6d2e2c;
+  --cr-800: #491f1d;
+  --cr-900: #240f0f;
+  --cr-950: #1a0b0a;
+
+  /* Rich Mahogany */
+  --rm-50: #f9eced;
+  --rm-100: #f3d8da;
+  --rm-200: #e6b2b5;
+  --rm-300: #da8b91;
+  --rm-400: #cd656c;
+  --rm-500: #c13e47;
+  --rm-600: #9a3239;
+  --rm-700: #74252b;
+  --rm-800: #4d191c;
+  --rm-900: #270c0e;
+  --rm-950: #1b090a;
+
+  /* Tokens Principales - MODO ORIGINAL (Marrón cálido de fondo y Rosa Rose Quartz / Cotton Rose nítido) */
+  --color-primary-dark: #fca5a5;
+  --color-primary-rgb: 244, 151, 149;
+  --color-light-bg: #2d1615;
+  --color-light-bg-rgb: 45, 22, 21;
+  --color-accent-1: #f49795;
+  --color-accent-2: #e07a78;
+  --color-highlight: #fde8e8;
+  
+  --font-display: 'PatinioBasica', 'Syne', 'Space Grotesk', -apple-system, sans-serif;
+  --font-mono: 'Space Grotesk', 'Inter', monospace, system-ui;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --nav-height: 48px;
+  --border-hairline: 1px solid rgba(244, 151, 149, 0.22);
+  --border-hairline-dark: 1px solid rgba(244, 151, 149, 0.4);
+}

@@ -1,0 +1,195 @@
+/* ==========================================================================
+   VIEW 5: ABOUT PAGE & EDITORIAL MANIFESTO
+   ========================================================================== */
+
+#view-about {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 100vw;
+  padding-top: max(4.5rem, env(safe-area-inset-top, 0px) + 2rem);
+  padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 0px) + 6rem);
+}
+
+@media (min-width: 768px) {
+  #view-about {
+    padding-top: 8rem;
+    padding-bottom: calc(var(--nav-height) + 7rem);
+  }
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: calc(100vh - 140px);
+  border-top: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+}
+
+@media (min-width: 900px) {
+  .about-container {
+    grid-template-columns: 1fr 1.2fr;
+    border-left: var(--border-hairline);
+    border-right: var(--border-hairline);
+  }
+}
+
+.about-image-column {
+  position: relative;
+  border-bottom: var(--border-hairline);
+  background-color: #ded6d6;
+}
+
+@media (min-width: 900px) {
+  .about-image-column {
+    border-bottom: none;
+    border-right: var(--border-hairline);
+  }
+}
+
+.about-portrait {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.portrait-caption {
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border-top: var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.portrait-signature-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.portrait-signature-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-accent-1);
+  text-transform: uppercase;
+}
+
+.portrait-signature-location {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+  color: var(--color-primary-dark);
+}
+
+.about-text-column {
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .about-text-column {
+    padding: 3.5rem;
+  }
+}
+
+.about-section {
+  margin-bottom: 2.5rem;
+}
+
+.about-name-title {
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.05em;
+}
+
+.about-subtitle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-accent-1);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.about-section .editorial-body {
+  margin-bottom: 1.25rem;
+}
+
+.about-quote {
+  margin: 2.5rem 0;
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--color-accent-1);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
+  background: rgba(var(--color-primary-rgb, 255, 255, 255), 0.02);
+}
+
+.about-divider {
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--color-accent-1);
+  margin: 1.75rem 0;
+  user-select: none;
+}
+
+.about-disciplines {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-accent-1);
+  margin-bottom: 0.6rem;
+}
+
+.about-presence {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(var(--color-primary-rgb, 255, 255, 255), 0.85);
+  margin-bottom: 0.5rem;
+}
+
+.about-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  border-top: var(--border-hairline);
+  padding-top: 2rem;
+}
+
+@media (min-width: 600px) {
+  .about-meta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.meta-block .mono-label {
+  color: var(--color-accent-1);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.meta-info {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  color: var(--color-primary-dark);
+}

@@ -1,0 +1,269 @@
+/* ==========================================================================
+   HEADER & BRAND LOGO
+   ========================================================================== */
+
+.fixed-top-header {
+  position: fixed;
+  top: 0;
+  padding-top: max(0.85rem, env(safe-area-inset-top, 0px));
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  width: 100%;
+  max-width: 100vw;
+}
+
+@media (min-width: 768px) {
+  .fixed-top-header {
+    top: 1.75rem;
+    padding-top: 0;
+  }
+}
+
+.brand-title {
+  display: inline-block;
+  pointer-events: auto;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 6.2vw, 2rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--cp-900);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  mix-blend-mode: normal;
+  text-shadow: 0 2px 20px rgba(245, 240, 240, 0.45);
+  line-height: 1;
+  max-width: 96vw;
+  animation: logoBreathingTracking 6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  will-change: letter-spacing;
+}
+
+@media (min-width: 768px) {
+  .brand-title {
+    font-size: clamp(2.8rem, 4.5vw, 4.4rem);
+    max-width: 100%;
+    animation: logoBreathingTrackingDesktop 6s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  }
+}
+
+@keyframes logoBreathingTracking {
+  0%, 33% {
+    letter-spacing: 0.06em;
+  }
+  65% {
+    letter-spacing: 0.14em;
+  }
+  92%, 100% {
+    letter-spacing: 0.06em;
+  }
+}
+
+@keyframes logoBreathingTrackingDesktop {
+  0%, 33% {
+    letter-spacing: 0.12em;
+  }
+  65% {
+    letter-spacing: 0.32em;
+  }
+  92%, 100% {
+    letter-spacing: 0.12em;
+  }
+}
+
+/* En vista de detalle de proyecto */
+body.in-project-view .fixed-top-header {
+  top: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  body.in-project-view .fixed-top-header {
+    top: 1.5rem;
+  }
+}
+
+body.in-project-view .brand-title {
+  mix-blend-mode: normal;
+  color: var(--cp-950);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  letter-spacing: 0.14em;
+  font-weight: 800;
+}
+
+/* Cabecera con franja/header para secciones Mármol y Sobre Mí */
+body.view-header-bar .fixed-top-header {
+  top: 0;
+  padding-top: max(1.15rem, env(safe-area-inset-top, 0px));
+  padding-bottom: 0.85rem;
+  background-color: rgba(36, 17, 16, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(244, 151, 149, 0.22);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  body.view-header-bar .fixed-top-header {
+    top: 0;
+    padding-top: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+}
+
+body[data-palette="invert"].view-header-bar .fixed-top-header {
+  background-color: rgba(10, 10, 10, 0.96);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+}
+
+body[data-palette="default"].view-header-bar .brand-title {
+  color: #f49795 !important;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+body[data-palette="default"].view-header-bar .header-tagline {
+  color: #f7b2b0 !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Animación de entrada hacia arriba para Giovanni Frontini en Arquitectura & Interiores */
+body.view-arquitectura-active .fixed-top-header {
+  animation: headerSlideUpIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes headerSlideUpIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tagline debajo del título: "Architecture & Interiors" / "ideas into spaces" */
+.header-tagline {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 1.4vw, 14px);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #f7b2b0;
+  font-weight: 600;
+  margin-top: 0.4rem;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: none;
+  position: relative;
+  padding-bottom: 4px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+}
+
+body[data-palette="invert"] .header-tagline {
+  color: #ffffff;
+}
+
+/* Línea de subrayado animada */
+.header-tagline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #f49795;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  transform-origin: left center;
+  transform: scaleX(1);
+  opacity: 0.95;
+  animation: taglineUnderlineLoop 4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+body[data-palette="invert"] .header-tagline::after {
+  background-color: #ffffff;
+}
+
+.theme-light-header .header-tagline {
+  color: var(--cp-900);
+  text-shadow: none;
+}
+
+body.in-project-view .header-tagline {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes taglineUnderlineLoop {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  45% {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: right center;
+  }
+  95% {
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+/* Overrides de color según vista */
+body[data-palette="invert"].view-arquitectura-active .brand-title {
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.85);
+}
+
+body[data-palette="default"].view-arquitectura-active .brand-title {
+  color: #f49795 !important;
+  text-shadow: 0 2px 25px rgba(0, 0, 0, 0.9);
+}
+
+.theme-light-header .brand-title {
+  mix-blend-mode: normal;
+  color: var(--color-primary-dark);
+  text-shadow: none;
+}
+
+/* Vista Grid (Comercial y Residencial): Título flotante sin caja ni barra de header */
+body[data-current-view="grid"] .fixed-top-header {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+
+body[data-current-view="grid"] .brand-title {
+  pointer-events: auto;
+}
+
+body[data-palette="invert"]:not(.theme-light-header):not(.in-project-view) .brand-title {
+  color: #ffffff;
+  text-shadow: 0 2px 25px rgba(0, 0, 0, 0.7);
+}
+
+body[data-palette="default"]:not(.theme-light-header):not(.in-project-view) .brand-title {
+  color: #f49795;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.85);
+}

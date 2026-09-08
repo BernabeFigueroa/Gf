@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -16,7 +18,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>{title}</title>
   <meta name="description" content={description}>
 
@@ -27,8 +29,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href={`${base}/style.css`}>
 </head>
 <body class="bg-light text-primary select-none antialiased">
   <slot />

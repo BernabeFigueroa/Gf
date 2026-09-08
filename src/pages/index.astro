@@ -5,16 +5,22 @@ import Navbar from '../components/Navbar.astro';
 import ProjectStrip from '../components/ProjectStrip.astro';
 import MobileDrawer from '../components/MobileDrawer.astro';
 import MobileMenuModal from '../components/MobileMenuModal.astro';
+import ContactModal from '../components/ContactModal.astro';
+import SplashIntro from '../components/SplashIntro.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <MainLayout>
+  <!-- Splash Screen Intro (Estilo Pacto: fondo marrón y letras rosa) -->
+  <SplashIntro />
+
   <!-- Custom Floating Mouse Follower for Desktop -->
   <div id="custom-cursor" class="custom-cursor">
+    <div id="cursor-gf" class="cursor-gf">GF</div>
     <div class="cursor-content">
-      <span id="cursor-title" class="cursor-title">CASA PEDREGAL</span>
-      <span id="cursor-sub" class="cursor-sub">RESIDENTIAL — 2024</span>
+      <span id="cursor-title" class="cursor-title"></span>
+      <span id="cursor-sub" class="cursor-sub"></span>
     </div>
   </div>
 
@@ -38,17 +44,40 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </section>
 
-    <!-- VIEW 2B: MÁRMOL SHOWCASE (Galería curada de marmolería, mesas, mesadas y video de taller) -->
+    <!-- VIEW 2B: MÁRMOL SHOWCASE (Marmolería Frontini & Arquitectura en Piedra) -->
     <section id="view-marmol" class="view-panel">
       <div class="marmol-viewport">
         <header class="marmol-header">
-          <span class="mono-label" data-i18n="marmol_badge">[ MARMOLERÍA FRONTINI ]</span>
-          <h2 class="marmol-title" data-i18n="marmol_title">MATERIA, PRECISIÓN & CANTERA</h2>
-          <p class="marmol-subtitle" data-i18n="marmol_subtitle">Mesas monolíticas, mesadas a medida y transformaciones en piedra natural seleccionada.</p>
+          <span class="mono-label" data-i18n="marmol_badge">[ MARMOLERÍA FRONTINI — EST. 1949 ]</span>
+          <h2 class="marmol-title" data-i18n="marmol_title">STONE AS ARCHITECTURE</h2>
+          
+          <blockquote class="marmol-quote" data-i18n="marmol_quote">
+            “I DON’T JUST SPECIFY STONE. I DESIGN WITH IT”
+          </blockquote>
+
+          <p class="marmol-body" data-i18n="marmol_body">
+            Stone is incorporated into my projects as architecture, furniture and detail — from monolithic tables and sculptural vanities to kitchens, bars, walls and bespoke elements.
+          </p>
         </header>
 
         <div id="marmol-grid" class="marmol-grid">
           <!-- Rendered via JS dynamically -->
+        </div>
+
+        <div class="marmol-footer-block">
+          <div class="marmol-heritage-text">
+            <span class="marmol-heritage-brand" data-i18n="marmol_heritage_brand">MARMOLERÍA FRONTINI</span>
+            <span class="marmol-heritage-sub" data-i18n="marmol_heritage_sub">Stone fabrication & craftsmanship since 1949.</span>
+          </div>
+          <a 
+            href="https://www.instagram.com/marmoleriafrontini/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="marmol-ig-btn"
+            data-i18n="marmol_ig_btn"
+          >
+            @MARMOLERIAFRONTINI ↗
+          </a>
         </div>
       </div>
     </section>
@@ -78,35 +107,54 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="about-container">
         <div class="about-image-column">
           <img id="about-portrait-img" src={`${base}/images/arquitecto/giovanni-frontini.webp`} alt="Giovanni Frontini" class="about-portrait" loading="lazy">
-          <div class="portrait-caption mono-label" data-i18n="portrait_caption">GIOVANNI FRONTINI — FUNDADOR Y ARQUITECTO PRINCIPAL</div>
+          <div class="portrait-caption">
+            <div class="portrait-signature-name">GIOVANNI FRONTINI</div>
+            <div class="portrait-signature-role">Architect · Interior Designer · Designer</div>
+            <div class="portrait-signature-location">Tucumán, Argentina</div>
+          </div>
         </div>
         <div class="about-text-column">
           <div class="about-section">
-            <h2 class="editorial-heading" id="about-manifesto-title">DISCIPLINA Y SILENCIO</h2>
+            <h2 class="editorial-heading about-name-title" id="about-manifesto-title">GIOVANNI FRONTINI</h2>
+            <div class="about-subtitle">Architect & Interior Designer</div>
+            
             <p class="editorial-body" id="about-bio-p1">
-              Giovanni Frontini opera en la intersección de la pureza tectónica, la materialidad mineral cruda y la luz coreografiada. El estudio concibe la arquitectura y el diseño de interiores no como una imposición formal, sino como un diálogo riguroso entre la materia noble, el espacio y la luz natural.
+              I am an architect and interior designer focused on creating spaces where architecture, materiality and identity come together.
             </p>
             <p class="editorial-body" id="about-bio-p2">
-              Elaboración, diseño y colocación de piedra natural, mármol, granito, cuarzo y piedra sinterizada. Asesoramiento y presupuesto sin cargo para proyectos residenciales y comerciales.
+              My work explores the relationship between space, proportion, texture and light, with a particular interest in natural materials and their ability to shape the character of an environment.
             </p>
+            <p class="editorial-body" id="about-bio-p3">
+              With a background in architecture and a strong connection to stone fabrication, I approach each project from both a design and material perspective — from the overall concept to the smallest detail.
+            </p>
+
+            <blockquote class="about-quote" id="about-quote">
+              “Idea is not simply selecting materials, but understanding them, transforming them and incorporating them into the architecture”
+            </blockquote>
+
+            <div class="about-divider">⸻</div>
+
+            <div class="about-disciplines">ARCHITECTURE / INTERIORS / MATERIAL</div>
+            <p class="about-presence">Based in Argentina, working across residential, commercial and hospitality projects.</p>
+
+            <div class="about-divider">⸻</div>
           </div>
 
           <div class="about-meta-grid">
             <div class="meta-block">
-              <span class="mono-label" data-i18n="label_studio">ESTUDIO & TALLER</span>
-              <p class="meta-info" id="about-studio-info">JUAN GORENA 1571<br>CONCEPCIÓN, TUCUMÁN<br>ARGENTINA (CP 4146)</p>
-            </div>
-            <div class="meta-block">
-              <span class="mono-label" data-i18n="label_services">ESPECIALIDAD & ASESORAMIENTO</span>
-              <p class="meta-info" id="about-services-info">PIEDRA NATURAL, MÁRMOL, GRANITO, CUARZO & PIEDRA SINTERIZADA.<br>ASESORAMIENTO Y PRESUPUESTO SIN CARGO.</p>
+              <span class="mono-label" data-i18n="label_studio">ESTUDIO</span>
+              <p class="meta-info" id="about-studio-info">JUAN GORENA 1610<br>CONCEPCIÓN, TUCUMÁN<br>ARGENTINA (CP 4146)</p>
             </div>
             <div class="meta-block">
               <span class="mono-label" data-i18n="label_inquiries">CONSULTAS</span>
-              <p class="meta-info"><a href="mailto:studio@giovannifrontini.com" class="editorial-link">STUDIO@GIOVANNIFRONTINI.COM</a><br>+54 9 3865 000000</p>
+              <p class="meta-info">
+                <a href="mailto:Giovanifrontini@gmail.com" class="editorial-link">GIOVANIFRONTINI@GMAIL.COM</a><br>
+                <a href="https://wa.me/5493816382147" target="_blank" rel="noopener" class="editorial-link">+54 9 3816382147</a>
+              </p>
             </div>
             <div class="meta-block">
               <span class="mono-label" data-i18n="label_social">REDES</span>
-              <p class="meta-info"><a href="https://www.instagram.com/marmoleriafrontini/" target="_blank" rel="noopener" class="editorial-link" id="about-instagram-link">@MARMOLERIAFRONTINI</a></p>
+              <p class="meta-info"><a href="https://www.instagram.com/giovannifrontini/" target="_blank" rel="noopener" class="editorial-link" id="about-instagram-link">@GIOVANNIFRONTINI</a></p>
             </div>
           </div>
         </div>
@@ -120,6 +168,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <!-- Mobile Menu Fullscreen Blurred Modal (Pacto Estudio Style) -->
   <MobileMenuModal />
+
+  <!-- Contact & WhatsApp Modal -->
+  <ContactModal />
 
   <!-- Fixed Bottom Navigation Bar -->
   <Navbar />

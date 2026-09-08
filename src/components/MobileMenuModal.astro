@@ -11,10 +11,10 @@
 
   <!-- Enlaces de navegación centrados verticalmente -->
   <div class="modal-links-container">
-    <button class="modal-nav-link active" data-target="home" data-action="nav-home" data-i18n="nav_home">INICIO</button>
-    <button class="modal-nav-link" data-target="arquitectura" data-action="filter-arquitectura" data-i18n="nav_arquitectura">ARQUITECTURA & INTERIORES</button>
+    <button class="modal-nav-link active" data-target="home" data-action="nav-home" data-i18n="nav_home">ARQUITECTURA & INTERIORES</button>
+    <button class="modal-nav-link" data-target="comercial" data-action="filter-comercial" data-i18n="nav_comercial">COMERCIAL</button>
+    <button class="modal-nav-link" data-target="residencial" data-action="filter-residencial" data-i18n="nav_residencial">RESIDENCIAL</button>
     <button class="modal-nav-link" data-target="marmol" data-action="filter-marmol" data-i18n="nav_marmol">MÁRMOL</button>
-    <button class="modal-nav-link" data-target="projects" data-action="filter-all" data-i18n="nav_projects">PROYECTOS</button>
     <button class="modal-nav-link" data-target="about" data-action="nav-about" data-i18n="nav_about">SOBRE MÍ</button>
 
     <div class="modal-controls-group">
@@ -34,12 +34,12 @@
 
   <!-- Barra inferior del modal con botón de correo a la izquierda y cerrar a la derecha -->
   <div class="modal-bottom-bar">
-    <a href="mailto:studio@giovannifrontini.com" class="mobile-nav-btn mail-icon-btn" aria-label="Email">
+    <button class="mobile-nav-btn mail-icon-btn" data-action="open-contact-modal" aria-label="Contacto / Mensaje">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mobile-bottom-svg">
         <rect x="2" y="4" width="20" height="16" rx="2"></rect>
         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
       </svg>
-    </a>
+    </button>
 
     <button class="mobile-nav-btn close-menu-btn" data-action="close-mobile-menu" aria-label="Cerrar menú">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-bottom-svg">

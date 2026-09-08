@@ -1,0 +1,186 @@
+/* ==========================================================================
+   VIEW 2: CATEGORY & ALL PROJECTS EDITORIAL GRID
+   ========================================================================== */
+
+#view-grid {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 100vw;
+  padding-top: 0;
+  padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  background-color: var(--cp-50);
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  border-bottom: 1px solid var(--cp-100);
+}
+
+@media (min-width: 768px) {
+  .editorial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .editorial-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.grid-card {
+  position: relative;
+  border-right: 1px solid var(--cp-100);
+  border-bottom: 1px solid var(--cp-100);
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--cp-100);
+  aspect-ratio: 4/3;
+}
+
+.grid-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.grid-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30, 21, 21, 0.75) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  color: #fff;
+  opacity: 0.95;
+  transition: opacity 0.3s ease;
+}
+
+.grid-card:hover .grid-card-overlay {
+  opacity: 1;
+}
+
+.grid-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.grid-card-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--color-highlight);
+  margin-top: 4px;
+}
+
+/* Full-width section divider attached directly below project cards */
+.grid-section-divider {
+  grid-column: 1 / -1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 1.5rem;
+  background-color: var(--cp-900, #241110);
+  border-top: 1px solid rgba(244, 151, 149, 0.25);
+  border-bottom: 1px solid rgba(244, 151, 149, 0.25);
+  box-sizing: border-box;
+}
+
+.grid-section-divider-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark, #fca5a5);
+}
+
+/* Small project card: occupies normal grid column (1 col), aligned flush to the left, no side borders */
+.grid-small-project-card {
+  position: relative;
+  border-right: none !important;
+  border-bottom: 1px solid var(--cp-100);
+  background-color: transparent !important;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.grid-comparison-stage {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  background-color: transparent;
+  overflow: hidden;
+  margin: 0;
+  line-height: 0;
+}
+
+.grid-comparison-base {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+}
+
+.grid-comparison-overlay-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.35s ease-in-out;
+  pointer-events: none;
+}
+
+/* Badge de Antes / Después en la esquina superior derecha dentro de la imagen */
+.grid-comparison-badge {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  background: rgba(30, 21, 21, 0.88);
+  color: #fff;
+  padding: 5px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  z-index: 6;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  line-height: 1.2;
+}
+
+/* Hover en PC: pure CSS fallback para garantizar funcionamiento inmediato */
+@media (hover: hover) and (pointer: fine) {
+  .grid-small-project-card:hover .grid-comparison-overlay-img {
+    opacity: 0 !important;
+  }
+}
+
+/* Estado activo / click para celular */
+.grid-small-project-card.show-before .grid-comparison-overlay-img {
+  opacity: 0 !important;
+}
+

@@ -4,9 +4,22 @@
  * Declarative DOM Listeners, Smooth Momentum Scroll & Responsive Drawer.
  */
 
+// Base URL: detectado automáticamente para GitHub Pages (/Gf/) o raíz local (/)
+const BASE_URL = (() => {
+  const scripts = document.querySelectorAll('script[src]');
+  for (const s of scripts) {
+    const src = s.getAttribute('src');
+    if (src && src.endsWith('/script.js')) {
+      return src.replace('/script.js', '');
+    }
+  }
+  return '';
+})();
+
 // Application State
 let ARCHITECTURE_DATA = [];
 let MARMOL_DATA = [];
+let SMALL_PROJECTS_DATA = [];
 let CONTENT_I18N = {};
 let currentLang = 'ES';
 let currentView = 'home';
@@ -17,35 +30,62 @@ const PALETTES = ['default', 'invert'];
 let currentPaletteIndex = 0;
 let currentPalette = 'default';
 
-// Cursor Coordinates
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-let cursorX = mouseX;
-let cursorY = mouseY;
-let isHoveringSlide = false;
-
 // DOM Element References
 const cursorElem = document.getElementById('custom-cursor');
 const cursorTitle = document.getElementById('cursor-title');
 const cursorSub = document.getElementById('cursor-sub');
 const slideshowTrack = document.getElementById('slideshow-track');
 const brandLogo = document.getElementById('brand-logo');
+const headerTagline = document.getElementById('header-tagline');
 
 /* --------------------------------------------------------------------------
    1. DATA LAYER (SSOT: /projects.json)
    -------------------------------------------------------------------------- */
+
+// Prefija paths absolutos con BASE_URL para compatibilidad con GitHub Pages subdirectory
+function prefixPath(path) {
+  if (!path || !path.startsWith('/')) return path;
+  return `${BASE_URL}${path}`;
+}
+
+function prefixProjectImages(project) {
+  if (!project) return project;
+  const p = { ...project };
+  if (p.heroImage) p.heroImage = prefixPath(p.heroImage);
+  if (p.heroVideo) p.heroVideo = prefixPath(p.heroVideo);
+  if (Array.isArray(p.homeImages)) p.homeImages = p.homeImages.map(prefixPath);
+  if (Array.isArray(p.gallery)) p.gallery = p.gallery.map(prefixPath);
+  return p;
+}
+
+function prefixMarmolItem(item) {
+  if (!item) return item;
+  const m = { ...item };
+  if (m.image) m.image = prefixPath(m.image);
+  if (m.image_before) m.image_before = prefixPath(m.image_before);
+  if (m.image_after) m.image_after = prefixPath(m.image_after);
+  if (m.video) m.video = prefixPath(m.video);
+  if (m.thumbnail) m.thumbnail = prefixPath(m.thumbnail);
+  return m;
+}
+
 async function loadProjectsData() {
   try {
-    const response = await fetch('/projects.json');
+    const response = await fetch(`${BASE_URL}/projects.json`);
     if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
     const data = await response.json();
-    ARCHITECTURE_DATA = data.projects || [];
-    MARMOL_DATA = data.marmol || [];
+    ARCHITECTURE_DATA = (data.projects || []).map(prefixProjectImages);
+    MARMOL_DATA = (data.marmol || []).map(prefixMarmolItem);
+    SMALL_PROJECTS_DATA = (data.small_projects || []).map(prefixMarmolItem);
     CONTENT_I18N = data.about || {};
+    if (CONTENT_I18N.portraitImage) {
+      CONTENT_I18N.portraitImage = prefixPath(CONTENT_I18N.portraitImage);
+    }
   } catch (err) {
     console.error('Critical: Failed to load portfolio data:', err);
     ARCHITECTURE_DATA = [];
     MARMOL_DATA = [];
+    SMALL_PROJECTS_DATA = [];
     CONTENT_I18N = {};
   }
 
@@ -56,6 +96,7 @@ async function loadProjectsData() {
    2. INITIALIZATION & DECLARATIVE EVENT BINDINGS
    -------------------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', async () => {
+  initSplashScreen();
   initializePalette();
   await loadProjectsData();
   applyLanguageTranslations(currentLang);
@@ -69,6 +110,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateAboutContent();
   updateViewTheme('home');
 });
+
+function initSplashScreen() {
+  const splash = document.getElementById('intro-splash');
+  if (!splash) return;
+
+  // Si ya se mostró en esta sesión, lo removemos de inmediato
+  if (sessionStorage.getItem('gf_intro_shown')) {
+    splash.remove();
+    return;
+  }
+
+  const hideSplash = () => {
+    sessionStorage.setItem('gf_intro_shown', 'true');
+    splash.classList.add('fade-out');
+    setTimeout(() => {
+      splash.remove();
+    }, 950);
+  };
+
+  // Esperar a que los recursos de la página carguen + pausa de lectura cómoda
+  window.addEventListener('load', () => {
+    setTimeout(hideSplash, 1800);
+  });
+
+  // Fallback de seguridad: si la carga se demora más de 3.5s, desvanecer
+  setTimeout(hideSplash, 3500);
+}
 
 function animateLogoTracking() {
   setTimeout(() => {
@@ -92,19 +160,17 @@ function setupGlobalActionListeners() {
         e.preventDefault();
         navigateTo('home');
         break;
-      case 'filter-arquitectura':
-      case 'filter-residential':
+      case 'filter-comercial':
         e.preventDefault();
-        filterProjects('arquitectura');
+        filterProjects('comercial');
+        break;
+      case 'filter-residencial':
+        e.preventDefault();
+        filterProjects('residencial');
         break;
       case 'filter-marmol':
-      case 'filter-retail':
         e.preventDefault();
         navigateTo('marmol');
-        break;
-      case 'filter-all':
-        e.preventDefault();
-        filterProjects('all');
         break;
       case 'nav-about':
         e.preventDefault();
@@ -134,10 +200,29 @@ function setupGlobalActionListeners() {
         e.preventDefault();
         closeDetailsDrawer();
         break;
+      case 'open-contact-modal':
+        e.preventDefault();
+        openContactModal();
+        break;
+      case 'close-contact-modal':
+        e.preventDefault();
+        closeContactModal();
+        break;
       default:
         break;
     }
   });
+
+  // Cerrar contact modal con tecla ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeContactModal();
+      closeMobileMenu();
+      closeDetailsDrawer();
+    }
+  });
+
+  setupContactForm();
 }
 
 function openMobileMenu() {
@@ -154,6 +239,59 @@ function closeMobileMenu() {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
   }
+}
+
+function openContactModal() {
+  closeMobileMenu();
+  const modal = document.getElementById('contact-modal');
+  if (modal) {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    const firstInput = modal.querySelector('#contact-nombre');
+    if (firstInput) setTimeout(() => firstInput.focus(), 100);
+  }
+}
+
+function closeContactModal() {
+  const modal = document.getElementById('contact-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+}
+
+function setupContactForm() {
+  const form = document.getElementById('contact-wsp-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nombre = (document.getElementById('contact-nombre')?.value || '').trim();
+    const apellido = (document.getElementById('contact-apellido')?.value || '').trim();
+    const numero = (document.getElementById('contact-numero')?.value || '').trim();
+    const mensaje = (document.getElementById('contact-mensaje')?.value || '').trim();
+
+    if (!nombre || !apellido || !mensaje) return;
+
+    // Formato exacto requerido: "hola soy {nombre} {apellido} y tengo en mente esto {mensaje}"
+    let mensajeWsp = `hola soy ${nombre} ${apellido} y tengo en mente esto ${mensaje}`;
+
+    // Si el usuario proporcionó número de contacto, lo agregamos de manera natural
+    if (numero) {
+      mensajeWsp += ` (Mi número de contacto es: ${numero})`;
+    }
+
+    const telefonoWhatsApp = '5493816382147';
+    const wspUrl = `https://wa.me/${telefonoWhatsApp}?text=${encodeURIComponent(mensajeWsp)}`;
+
+    // Abrir WhatsApp en nueva pestaña
+    window.open(wspUrl, '_blank', 'noopener,noreferrer');
+
+    // Cerrar modal y limpiar formulario
+    closeContactModal();
+    form.reset();
+  });
 }
 
 /* --------------------------------------------------------------------------
@@ -202,9 +340,9 @@ function navigateTo(viewId, activeTabId = null) {
 }
 
 function updateViewTheme(viewId, targetTab = null) {
-  const isArquitectura = viewId === 'grid' && (targetTab === 'arquitectura' || targetTab === 'residential');
+  const isGridCategory = viewId === 'grid' && (targetTab === 'comercial' || targetTab === 'residencial' || targetTab === 'arquitectura');
 
-  if (isArquitectura) {
+  if (isGridCategory) {
     const topHeader = document.querySelector('.fixed-top-header');
     if (topHeader) {
       topHeader.style.animation = 'none';
@@ -212,8 +350,14 @@ function updateViewTheme(viewId, targetTab = null) {
       topHeader.style.animation = '';
     }
     document.body.classList.add('view-arquitectura-active');
+    if (headerTagline) {
+      headerTagline.textContent = 'ideas into spaces';
+    }
   } else {
     document.body.classList.remove('view-arquitectura-active');
+    if (headerTagline) {
+      headerTagline.textContent = 'Architecture & Interiors';
+    }
   }
 
   const isHeaderBarView = viewId === 'marmol' || viewId === 'about';
@@ -223,7 +367,9 @@ function updateViewTheme(viewId, targetTab = null) {
     document.body.classList.remove('view-header-bar');
   }
 
-  if (viewId === 'home') {
+  document.body.setAttribute('data-current-view', viewId);
+
+  if (viewId === 'home' || viewId === 'grid') {
     document.body.classList.remove('theme-light-header');
     document.body.classList.remove('in-project-view');
   } else if (viewId === 'project') {
@@ -318,12 +464,10 @@ function renderHomeSlideshow() {
 
     slide.addEventListener('click', () => openProject(project.id));
     slide.addEventListener('mouseenter', () => {
-      isHoveringSlide = true;
       updateCursorContent(project.title, `${projType} — ${project.year}`);
       cursorElem?.classList.add('active');
     });
     slide.addEventListener('mouseleave', () => {
-      isHoveringSlide = false;
       cursorElem?.classList.remove('active');
     });
 
@@ -421,6 +565,95 @@ function filterProjects(category) {
     card.addEventListener('click', () => openProject(project.id));
     gridContainer.appendChild(card);
   });
+
+  // Si la categoría es 'residencial', añadir debajo de las dos casas la barra pegada de "PEQUEÑOS PROYECTOS"
+  // y la tarjeta interactiva de Antes/Después sin recortar la imagen
+  if (category === 'residencial' && SMALL_PROJECTS_DATA.length > 0) {
+    const isEs = currentLang === 'ES';
+
+    // 1. Barra pegada que cruza toda la pantalla
+    const divider = document.createElement('div');
+    divider.className = 'grid-section-divider';
+    
+    const dividerTitle = document.createElement('span');
+    dividerTitle.className = 'grid-section-divider-title';
+    dividerTitle.setAttribute('data-i18n', 'section_small_projects');
+    dividerTitle.textContent = isEs ? 'PEQUEÑOS PROYECTOS' : 'SMALL PROJECTS';
+
+    divider.appendChild(dividerTitle);
+    gridContainer.appendChild(divider);
+
+    // 2. Render de cada item de pequeños proyectos (ej. el baño en mármol)
+    SMALL_PROJECTS_DATA.forEach((item) => {
+      const smallCard = document.createElement('div');
+      smallCard.className = 'grid-small-project-card';
+
+      const stage = document.createElement('div');
+      stage.className = 'grid-comparison-stage';
+
+      const imgBefore = document.createElement('img');
+      imgBefore.src = item.image_before;
+      imgBefore.alt = 'Antes';
+      imgBefore.className = 'grid-comparison-base';
+      imgBefore.loading = 'lazy';
+
+      const imgAfter = document.createElement('img');
+      imgAfter.src = item.image_after;
+      imgAfter.alt = 'Después';
+      imgAfter.className = 'grid-comparison-overlay-img';
+      imgAfter.loading = 'lazy';
+      imgAfter.style.opacity = '1';
+
+      const badge = document.createElement('div');
+      badge.className = 'grid-comparison-badge';
+      badge.textContent = isEs ? 'DESPUÉS' : 'AFTER';
+
+      stage.appendChild(imgBefore);
+      stage.appendChild(imgAfter);
+      stage.appendChild(badge);
+      smallCard.appendChild(stage);
+
+      // Estado de Antes / Después
+      let isShowingBefore = false;
+
+      function updateCompareState(showBefore) {
+        isShowingBefore = showBefore;
+        if (showBefore) {
+          smallCard.classList.add('show-before');
+          imgAfter.style.opacity = '0';
+          badge.textContent = currentLang === 'ES' ? 'ESTADO ANTERIOR' : 'BEFORE STATE';
+        } else {
+          smallCard.classList.remove('show-before');
+          imgAfter.style.opacity = '1';
+          badge.textContent = currentLang === 'ES' ? 'DESPUÉS' : 'AFTER';
+        }
+      }
+
+      // 1. Hover para computadora: al pasar el mouse se ve el antes, al salir el después
+      smallCard.addEventListener('mouseenter', () => {
+        updateCompareState(true);
+      });
+
+      smallCard.addEventListener('mouseleave', () => {
+        updateCompareState(false);
+      });
+
+      // 2. En celular / touch: un clic para ver el antes, otro clic para ver el después, alternando
+      // En desktop: al hacer clic abre el modal con los detalles del proyecto sin abrir otra página
+      smallCard.addEventListener('click', (e) => {
+        const isTouch = window.innerWidth < 768 || ('ontouchstart' in window);
+        if (isTouch) {
+          e.preventDefault();
+          updateCompareState(!isShowingBefore);
+        } else {
+          // En computadora, si hace clic abre el modal de detalles
+          openProjectDetailsModal(item);
+        }
+      });
+
+      gridContainer.appendChild(smallCard);
+    });
+  }
 
   const activeTabName = category === 'all' ? 'projects' : category;
   navigateTo('grid', activeTabName);
@@ -590,6 +823,34 @@ function updateProjectProgressBar() {
 /* --------------------------------------------------------------------------
    8. MOBILE DRAWER CONTROLS
    -------------------------------------------------------------------------- */
+function openProjectDetailsModal(item) {
+  const dTitle = document.getElementById('drawer-project-title');
+  if (dTitle) dTitle.textContent = currentLang === 'ES' ? (item.title_es || item.title) : (item.title_en || item.title);
+
+  const dYear = document.getElementById('d-year');
+  if (dYear) dYear.textContent = item.year || '2024';
+
+  const dLoc = document.getElementById('d-loc');
+  if (dLoc) dLoc.textContent = currentLang === 'ES' ? (item.location_es || 'CONCEPCIÓN, TUCUMÁN') : (item.location_en || 'CONCEPCION, TUCUMAN');
+
+  const dSurf = document.getElementById('d-surf');
+  if (dSurf) dSurf.textContent = item.surface || '18 M²';
+
+  const dType = document.getElementById('d-type');
+  if (dType) dType.textContent = currentLang === 'ES' ? (item.type_es || item.type) : (item.type_en || item.type);
+
+  const dStatus = document.getElementById('d-status');
+  if (dStatus) dStatus.textContent = currentLang === 'ES' ? 'CONSTRUIDO' : 'COMPLETED';
+
+  const dPhoto = document.getElementById('d-photo');
+  if (dPhoto) dPhoto.textContent = item.photographer || 'GIOVANNI FRONTINI';
+
+  const dDesc = document.getElementById('drawer-project-desc');
+  if (dDesc) dDesc.textContent = currentLang === 'ES' ? (item.desc_es || item.desc_en) : (item.desc_en || item.desc_es);
+
+  openDetailsDrawer();
+}
+
 function openDetailsDrawer() {
   document.getElementById('mobile-drawer')?.classList.add('active');
   document.getElementById('mobile-drawer-overlay')?.classList.add('active');
@@ -605,36 +866,72 @@ function closeDetailsDrawer() {
    -------------------------------------------------------------------------- */
 const UI_TRANSLATIONS = {
   nav_home: {
-    ES: 'INICIO',
-    EN: 'HOME'
-  },
-  nav_arquitectura: {
     ES: 'ARQUITECTURA & INTERIORES',
     EN: 'ARCHITECTURE & INTERIORS'
+  },
+  nav_comercial: {
+    ES: 'COMERCIAL',
+    EN: 'COMMERCIAL'
+  },
+  nav_residencial: {
+    ES: 'RESIDENCIAL',
+    EN: 'RESIDENTIAL'
   },
   nav_marmol: {
     ES: 'MÁRMOL',
     EN: 'MARBLE'
   },
-  nav_projects: {
-    ES: 'PROYECTOS',
-    EN: 'PROJECTS'
-  },
   nav_about: {
     ES: 'SOBRE MÍ',
     EN: 'ABOUT'
   },
+  section_small_projects: {
+    ES: 'PEQUEÑOS PROYECTOS',
+    EN: 'SMALL PROJECTS'
+  },
+  compare_hint_desktop: {
+    ES: '[ PASAR EL CURSOR PARA VER ANTES / DESPUÉS ]',
+    EN: '[ HOVER TO VIEW BEFORE / AFTER ]'
+  },
+  compare_hint_mobile: {
+    ES: '[ TOCAR PARA VER ANTES / DESPUÉS ]',
+    EN: '[ TAP TO TOGGLE BEFORE / AFTER ]'
+  },
+  state_after: {
+    ES: 'DESPUÉS',
+    EN: 'AFTER'
+  },
+  state_before: {
+    ES: 'ESTADO ANTERIOR',
+    EN: 'BEFORE STATE'
+  },
   marmol_badge: {
-    ES: '[ MARMOLERÍA FRONTINI ]',
-    EN: '[ FRONTINI MARBLE STUDIO ]'
+    ES: '[ MARMOLERÍA FRONTINI — EST. 1949 ]',
+    EN: '[ FRONTINI MARBLE STUDIO — EST. 1949 ]'
   },
   marmol_title: {
-    ES: 'MATERIA, PRECISIÓN & CANTERA',
-    EN: 'MATTER, PRECISION & QUARRY'
+    ES: 'LA PIEDRA COMO ARQUITECTURA',
+    EN: 'STONE AS ARCHITECTURE'
   },
-  marmol_subtitle: {
-    ES: 'Mesas monolíticas, mesadas a medida y transformaciones en piedra natural seleccionada.',
-    EN: 'Monolithic tables, custom countertops, and architectural transformations in selected natural stone.'
+  marmol_quote: {
+    ES: '“NO SÓLO ESPECIFICO PIEDRA. DISEÑO CON ELLA”',
+    EN: '“I DON’T JUST SPECIFY STONE. I DESIGN WITH IT”'
+  },
+  marmol_body: {
+    ES: 'La piedra se incorpora a mis proyectos como arquitectura, mobiliario y detalle — desde mesas monolíticas y vanities escultóricos hasta cocinas, barras, muros y elementos a medida.',
+    EN: 'Stone is incorporated into my projects as architecture, furniture and detail — from monolithic tables and sculptural vanities to kitchens, bars, walls and bespoke elements.'
+  },
+  marmol_heritage_brand: {
+    ES: 'MARMOLERÍA FRONTINI',
+    EN: 'MARMOLERÍA FRONTINI'
+  },
+  marmol_heritage_sub: {
+    ES: 'Elaboración y oficio en piedra natural desde 1949.',
+    EN: 'Stone fabrication & craftsmanship since 1949.'
+  },
+  marmol_ig_btn: {
+    ES: '@MARMOLERIAFRONTINI ↗',
+    EN: '@MARMOLERIAFRONTINI ↗'
   },
   details_btn: {
     ES: 'DETALLES',
@@ -695,6 +992,38 @@ const UI_TRANSLATIONS = {
   label_social: {
     ES: 'REDES',
     EN: 'SOCIAL'
+  },
+  contact_modal_tag: {
+    ES: '[ INICIAR PROYECTO ]',
+    EN: '[ START A PROJECT ]'
+  },
+  contact_modal_title: {
+    ES: 'HABLEMOS DE TU PROYECTO',
+    EN: "LET'S TALK ABOUT YOUR PROJECT"
+  },
+  contact_modal_subtitle: {
+    ES: 'Completá tus datos para enviarnos tu consulta directamente a WhatsApp.',
+    EN: 'Fill in your details to send your inquiry directly to WhatsApp.'
+  },
+  contact_label_name: {
+    ES: 'NOMBRE *',
+    EN: 'FIRST NAME *'
+  },
+  contact_label_lastname: {
+    ES: 'APELLIDO *',
+    EN: 'LAST NAME *'
+  },
+  contact_label_phone: {
+    ES: 'NÚMERO DE TELÉFONO',
+    EN: 'PHONE NUMBER'
+  },
+  contact_label_message: {
+    ES: '¿QUÉ TENÉS EN MENTE? *',
+    EN: 'WHAT DO YOU HAVE IN MIND? *'
+  },
+  contact_btn_send: {
+    ES: 'ENVIAR A WHATSAPP',
+    EN: 'SEND TO WHATSAPP'
   }
 };
 
@@ -751,9 +1080,8 @@ function applyLanguageTranslations(lang) {
   // 7. If currently on grid view, re-filter current category to refresh labels
   if (currentView === 'grid') {
     const activeNavTab = document.querySelector('.nav-tab.active');
-    const target = activeNavTab ? activeNavTab.dataset.target : 'projects';
-    const category = target === 'projects' ? 'all' : target;
-    filterProjects(category);
+    const target = activeNavTab ? activeNavTab.dataset.target : 'comercial';
+    filterProjects(target);
   }
 }
 
@@ -789,10 +1117,10 @@ function applyColorPalette(paletteName) {
   if (knob) {
     if (selected === 'invert') {
       knob.style.transform = 'translateX(-16px)';
-      knob.style.backgroundColor = '#f8eded';
+      knob.style.backgroundColor = '#ffffff';
     } else {
       knob.style.transform = 'translateX(0px)';
-      knob.style.backgroundColor = '#1e1515';
+      knob.style.backgroundColor = '#e2b8b6';
     }
   }
 
@@ -800,15 +1128,15 @@ function applyColorPalette(paletteName) {
   const dot = document.querySelector('.nav-theme-dot');
   if (dot) {
     if (selected === 'invert') {
-      dot.style.backgroundColor = '#f8eded';
-      dot.style.borderColor = 'rgba(248, 237, 237, 0.4)';
-      dot.setAttribute('title', 'Modo Invertido (Click para volver al modo original)');
-      dot.setAttribute('aria-label', 'Modo Invertido activo');
+      dot.style.backgroundColor = '#ffffff';
+      dot.style.borderColor = '#000000';
+      dot.setAttribute('title', 'Modo Blanco & Negro (Click para volver a Marrón & Rosa)');
+      dot.setAttribute('aria-label', 'Modo Blanco y Negro activo');
     } else {
-      dot.style.backgroundColor = '#1e1515';
-      dot.style.borderColor = 'rgba(30, 21, 21, 0.2)';
-      dot.setAttribute('title', 'Modo Original (Click para invertir colores)');
-      dot.setAttribute('aria-label', 'Modo Original activo');
+      dot.style.backgroundColor = '#e2b8b6';
+      dot.style.borderColor = '#2d1615';
+      dot.setAttribute('title', 'Modo Marrón & Rosa (Click para cambiar a Blanco & Negro)');
+      dot.setAttribute('aria-label', 'Modo Marrón y Rosa activo');
     }
   }
 }
@@ -829,20 +1157,34 @@ function updateAboutContent() {
 
   if (manifestoTitle) {
     manifestoTitle.textContent = currentLang === 'ES'
-      ? (CONTENT_I18N.manifesto_title_es || 'DISCIPLINA Y SILENCIO')
-      : (CONTENT_I18N.manifesto_title_en || 'DISCIPLINE & SILENCE');
+      ? (CONTENT_I18N.manifesto_title_es || 'GIOVANNI FRONTINI')
+      : (CONTENT_I18N.manifesto_title_en || 'GIOVANNI FRONTINI');
   }
 
   if (bio1) {
     bio1.textContent = currentLang === 'ES'
-      ? (CONTENT_I18N.bio1_es || '')
-      : (CONTENT_I18N.bio1_en || '');
+      ? (CONTENT_I18N.bio1_es || bio1.textContent)
+      : (CONTENT_I18N.bio1_en || bio1.textContent);
   }
 
   if (bio2) {
     bio2.textContent = currentLang === 'ES'
-      ? (CONTENT_I18N.bio2_es || '')
-      : (CONTENT_I18N.bio2_en || '');
+      ? (CONTENT_I18N.bio2_es || bio2.textContent)
+      : (CONTENT_I18N.bio2_en || bio2.textContent);
+  }
+
+  const bio3 = document.getElementById('about-bio-p3');
+  if (bio3 && (CONTENT_I18N.bio3_es || CONTENT_I18N.bio3_en)) {
+    bio3.textContent = currentLang === 'ES'
+      ? (CONTENT_I18N.bio3_es || bio3.textContent)
+      : (CONTENT_I18N.bio3_en || bio3.textContent);
+  }
+
+  const quoteEl = document.getElementById('about-quote');
+  if (quoteEl && (CONTENT_I18N.quote_es || CONTENT_I18N.quote_en)) {
+    quoteEl.textContent = currentLang === 'ES'
+      ? (CONTENT_I18N.quote_es || quoteEl.textContent)
+      : (CONTENT_I18N.quote_en || quoteEl.textContent);
   }
 
   if (btnText) {
@@ -866,7 +1208,12 @@ function updateAboutContent() {
   const igLink = document.getElementById('about-instagram-link');
   if (igLink && CONTENT_I18N.instagram) {
     igLink.href = CONTENT_I18N.instagram;
-    igLink.textContent = CONTENT_I18N.instagram_handle || '@MARMOLERIAFRONTINI';
+    igLink.textContent = CONTENT_I18N.instagram_handle || '@GIOVANNIFRONTINI';
+  }
+
+  const portraitImg = document.getElementById('about-portrait-img');
+  if (portraitImg && CONTENT_I18N.portraitImage) {
+    portraitImg.src = CONTENT_I18N.portraitImage;
   }
 }
 
@@ -877,6 +1224,8 @@ function renderMarmolShowcase() {
   const container = document.getElementById('marmol-grid');
   if (!container) return;
   container.innerHTML = '';
+
+  const isEs = currentLang === 'ES';
 
   MARMOL_DATA.forEach((item) => {
     const card = document.createElement('div');
@@ -910,7 +1259,7 @@ function renderMarmolShowcase() {
 
       const badge = document.createElement('div');
       badge.className = 'comparison-badge';
-      badge.textContent = currentLang === 'ES' ? 'DESPUÉS' : 'AFTER';
+      badge.textContent = isEs ? 'DESPUÉS' : 'AFTER';
 
       wrapper.appendChild(imgBefore);
       wrapper.appendChild(imgAfter);
@@ -918,11 +1267,11 @@ function renderMarmolShowcase() {
 
       card.addEventListener('mouseenter', () => {
         imgAfter.style.opacity = '0';
-        badge.textContent = currentLang === 'ES' ? 'ESTADO ANTERIOR' : 'BEFORE STATE';
+        badge.textContent = isEs ? 'ESTADO ANTERIOR' : 'BEFORE STATE';
       });
       card.addEventListener('mouseleave', () => {
         imgAfter.style.opacity = '1';
-        badge.textContent = currentLang === 'ES' ? 'DESPUÉS' : 'AFTER';
+        badge.textContent = isEs ? 'DESPUÉS' : 'AFTER';
       });
 
       card.appendChild(wrapper);
@@ -940,15 +1289,15 @@ function renderMarmolShowcase() {
 
     const type = document.createElement('div');
     type.className = 'marmol-card-type';
-    type.textContent = currentLang === 'ES' ? (item.type_es || item.type) : (item.type_en || item.type);
+    type.textContent = isEs ? (item.type_es || item.type) : (item.type_en || item.type);
 
     const title = document.createElement('h3');
     title.className = 'marmol-card-title';
-    title.textContent = currentLang === 'ES' ? (item.title_es || item.title) : (item.title_en || item.title);
+    title.textContent = isEs ? (item.title_es || item.title) : (item.title_en || item.title);
 
     const desc = document.createElement('p');
     desc.className = 'marmol-card-desc';
-    desc.textContent = currentLang === 'ES' ? (item.desc_es || item.desc_en) : (item.desc_en || item.desc_es);
+    desc.textContent = isEs ? (item.desc_es || item.desc_en) : (item.desc_en || item.desc_es);
 
     meta.appendChild(type);
     meta.appendChild(title);
@@ -960,29 +1309,39 @@ function renderMarmolShowcase() {
 }
 
 /* --------------------------------------------------------------------------
-   11. CURSOR LERP ENGINE
+   11. INSTANT CURSOR ENGINE (Zero Delay)
    -------------------------------------------------------------------------- */
 function setupCursor() {
   if (!cursorElem) return;
 
+  let hasMoved = false;
+
   window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    const x = e.clientX;
+    const y = e.clientY;
+
+    cursorElem.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+
+    if (!hasMoved) {
+      hasMoved = true;
+      cursorElem.classList.add('cursor-ready');
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', () => {
+    cursorElem.classList.remove('cursor-ready');
   });
 
-  function renderCursorLerp() {
-    cursorX += (mouseX - cursorX) * 0.16;
-    cursorY += (mouseY - cursorY) * 0.16;
-
-    cursorElem.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
-    requestAnimationFrame(renderCursorLerp);
-  }
-
-  requestAnimationFrame(renderCursorLerp);
+  document.addEventListener('mouseenter', () => {
+    if (hasMoved) {
+      cursorElem.classList.add('cursor-ready');
+    }
+  });
 }
 
 function updateCursorContent(title, sub) {
   if (cursorTitle) cursorTitle.textContent = title;
   if (cursorSub) cursorSub.textContent = sub;
 }
+
 

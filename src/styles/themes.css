@@ -1,0 +1,611 @@
+/* ==========================================================================
+   PALETTE MODES: ORIGINAL (MARRÓN & ROSA) vs INVERTIDO (BLANCO & NEGRO)
+   ========================================================================== */
+
+/* Transiciones globales al alternar modo */
+body, .view-panel, .fixed-bottom-nav, .details-drawer, .bottom-sheet-drawer,
+.marmol-card-meta, .mobile-nav-modal, .marmol-viewport, .about-container,
+.editorial-grid, .grid-card, .desktop-project-strip {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* --------------------------------------------------------------------------
+   1. MODO ORIGINAL: Marrón & Rosa
+   -------------------------------------------------------------------------- */
+body,
+body[data-palette="default"] {
+  background-color: #2d1615;
+  color: #f7b2b0;
+}
+
+body[data-palette="default"] .view-panel {
+  background-color: #2d1615;
+}
+
+body[data-palette="default"] .brand-title {
+  color: #f49795 !important;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.75);
+}
+
+body[data-palette="default"] .header-tagline {
+  color: #f7b2b0 !important;
+}
+
+body[data-palette="default"] #view-grid {
+  background-color: #2d1615 !important;
+}
+
+body[data-palette="default"] .editorial-grid {
+  background-color: #2d1615 !important;
+  border-bottom-color: rgba(244, 151, 149, 0.2);
+}
+
+body[data-palette="default"] .grid-card {
+  background-color: #381c1a !important;
+  border-right-color: rgba(244, 151, 149, 0.2);
+  border-bottom-color: rgba(244, 151, 149, 0.2);
+}
+
+body[data-palette="default"] .nav-tab {
+  color: #f49795;
+}
+
+body[data-palette="default"] .nav-tab:hover {
+  color: #ffffff;
+}
+
+body[data-palette="default"] .nav-tab::after {
+  background-color: #6d2f2c;
+}
+
+body[data-palette="default"] .nav-tab.active {
+  background-color: #4a2523 !important;
+  color: #f49795 !important;
+  border-color: #f49795 !important;
+}
+
+body[data-palette="default"] .nav-icon-link {
+  color: #f49795;
+}
+
+body[data-palette="default"] .nav-tab-square {
+  background-color: rgba(45, 22, 21, 0.85);
+  color: #f49795;
+  border-color: #f49795;
+}
+
+body[data-palette="default"] .nav-theme-dot {
+  background-color: #f49795 !important;
+  border-color: #2d1615 !important;
+}
+
+body[data-palette="default"] .desktop-project-strip {
+  background-color: #241110 !important;
+  border-top-color: rgba(244, 151, 149, 0.2) !important;
+}
+
+body[data-palette="default"].in-project-view .fixed-bottom-nav {
+  background-color: #241110 !important;
+  border-top: 1px solid rgba(244, 151, 149, 0.2) !important;
+}
+
+body[data-palette="default"].in-project-view .nav-tab,
+body[data-palette="default"].in-project-view .nav-icon-link,
+body[data-palette="default"].in-project-view .nav-tab-square {
+  color: #f49795 !important;
+}
+
+body[data-palette="default"].in-project-view .nav-tab.active {
+  color: #f7b2b0 !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+}
+
+body[data-palette="default"] .p-title-display {
+  color: #f7b2b0 !important;
+}
+
+body[data-palette="default"] .strip-key {
+  color: #e07a78 !important;
+}
+
+body[data-palette="default"] .strip-val {
+  color: #f7b2b0 !important;
+}
+
+body[data-palette="default"] .project-dot-indicator,
+body[data-palette="default"] .project-progress-bar {
+  background-color: #f49795 !important;
+}
+
+body[data-palette="default"] #view-marmol {
+  background-color: #2d1615;
+}
+
+body[data-palette="default"] .marmol-title,
+body[data-palette="default"] .editorial-heading {
+  color: #f7b2b0;
+}
+
+body[data-palette="default"] .marmol-quote {
+  color: #f7b2b0;
+  border-left-color: #f49795;
+}
+
+body[data-palette="default"] .marmol-body,
+body[data-palette="default"] .marmol-card-desc {
+  color: #e09492;
+}
+
+body[data-palette="default"] .marmol-intermezzo {
+  border-color: rgba(244, 151, 149, 0.2);
+}
+
+body[data-palette="default"] .marmol-footer-block {
+  background-color: #241110;
+  border-color: rgba(244, 151, 149, 0.2);
+}
+
+body[data-palette="default"] .marmol-heritage-brand {
+  color: #f7b2b0;
+}
+
+body[data-palette="default"] .marmol-heritage-sub {
+  color: #c08785;
+}
+
+body[data-palette="default"] .marmol-ig-btn {
+  border-color: rgba(244, 151, 149, 0.4);
+  color: #f7b2b0;
+}
+
+body[data-palette="default"] .marmol-ig-btn:hover {
+  border-color: #f7b2b0;
+  background-color: rgba(244, 151, 149, 0.15);
+  color: #ffffff;
+}
+
+body[data-palette="default"] .marmol-card-video,
+body[data-palette="default"] .marmol-card-wide,
+body[data-palette="default"] .marmol-card-tall,
+body[data-palette="default"] .marmol-card-comparison {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+body[data-palette="default"] .marmol-card-meta {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+body[data-palette="default"] .marmol-card-title {
+  color: #f7b2b0;
+}
+
+body[data-palette="default"] .marmol-card-type {
+  color: #f49795;
+}
+
+body[data-palette="default"] .about-image-column {
+  background-color: #241110;
+}
+
+body[data-palette="default"] .about-portrait {
+  filter: none;
+}
+
+body[data-palette="default"] .editorial-body,
+body[data-palette="default"] .about-presence {
+  color: #fce7e7;
+}
+
+body[data-palette="default"] .portrait-signature-name {
+  color: #f7b2b0;
+}
+
+body[data-palette="default"] .portrait-signature-role {
+  color: #f49795;
+}
+
+body[data-palette="default"] .grid-section-divider {
+  background-color: #241110 !important;
+  border-top-color: rgba(244, 151, 149, 0.25) !important;
+  border-bottom-color: rgba(244, 151, 149, 0.25) !important;
+}
+
+body[data-palette="default"] .grid-section-divider-title {
+  color: #fca5a5 !important;
+}
+
+body[data-palette="default"] .grid-small-project-card {
+  background-color: transparent !important;
+  border-right: none !important;
+  border-bottom-color: rgba(244, 151, 149, 0.2) !important;
+}
+
+body[data-palette="default"] .grid-comparison-badge {
+  background: rgba(30, 21, 21, 0.88);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+body[data-palette="default"] .portrait-signature-location {
+  color: #e09f9d;
+}
+
+body[data-palette="default"] .about-subtitle,
+body[data-palette="default"] .about-disciplines,
+body[data-palette="default"] .about-divider {
+  color: #f49795;
+}
+
+body[data-palette="default"] .about-quote {
+  color: #ffffff;
+  border-left-color: #f49795;
+  background: rgba(244, 151, 149, 0.05);
+}
+
+body[data-palette="default"] .meta-info {
+  color: #fce7e7;
+}
+
+body[data-palette="default"] .meta-block .mono-label {
+  color: #f49795;
+}
+
+body[data-palette="default"] .mobile-nav-modal {
+  background: rgba(45, 22, 21, 0.95);
+}
+
+body[data-palette="default"] .modal-brand,
+body[data-palette="default"] .modal-nav-link,
+body[data-palette="default"] .modal-icon-link,
+body[data-palette="default"] .mobile-nav-btn {
+  color: #f7b2b0 !important;
+}
+
+body[data-palette="default"] .modal-nav-link.active::after {
+  background-color: #f49795;
+}
+
+/* Badge flotante del cursor en Modo Original: Fondo rosa con letras marrón café para máxima legibilidad */
+body[data-palette="default"] .cursor-content {
+  background-color: #f49795;
+  border: 1px solid rgba(45, 22, 21, 0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+body[data-palette="default"] .cursor-title {
+  color: #24100f; /* Marrón oscuro profundo legible */
+}
+
+body[data-palette="default"] .cursor-sub {
+  color: #5a2e2b; /* Marrón medio cálido */
+}
+
+/* --------------------------------------------------------------------------
+   2. MODO INVERTIDO: Puro Blanco & Negro
+   -------------------------------------------------------------------------- */
+body[data-palette="invert"] {
+  --color-primary-dark: #ffffff;
+  --color-primary-rgb: 255, 255, 255;
+  --color-light-bg: #000000;
+  --color-light-bg-rgb: 0, 0, 0;
+  --color-accent-1: #ffffff;
+  --color-accent-2: #cccccc;
+  --color-highlight: #ffffff;
+  --border-hairline: 1px solid rgba(255, 255, 255, 0.2);
+  --border-hairline-dark: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: #000000;
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .view-panel {
+  background-color: #000000;
+}
+
+body[data-palette="invert"] .brand-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 22px rgba(255, 255, 255, 0.25);
+}
+
+body[data-palette="invert"] .header-tagline {
+  color: #ffffff !important;
+}
+
+body[data-palette="invert"] .header-tagline::after {
+  background-color: #ffffff !important;
+}
+
+body[data-palette="invert"].theme-light-header .brand-title {
+  color: #ffffff !important;
+}
+
+body[data-palette="invert"] #view-grid {
+  background-color: #000000 !important;
+}
+
+body[data-palette="invert"] .editorial-grid {
+  background-color: #000000 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+body[data-palette="invert"] .grid-card {
+  background-color: #0f0f0f !important;
+  border-right-color: rgba(255, 255, 255, 0.15);
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+body[data-palette="invert"] .fixed-bottom-nav {
+  background-color: transparent !important;
+}
+
+body[data-palette="invert"] .nav-tab {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+body[data-palette="invert"] .nav-tab:hover {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .nav-tab::after {
+  background-color: #ffffff;
+}
+
+body[data-palette="invert"] .nav-tab.active {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2) !important;
+  text-shadow: none !important;
+}
+
+body[data-palette="invert"] .nav-icon-link {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .nav-tab-square {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #ffffff !important;
+}
+
+body[data-palette="invert"] .nav-theme-dot {
+  background-color: #ffffff !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+}
+
+body[data-palette="invert"].in-project-view .fixed-bottom-nav {
+  background-color: #000000 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+body[data-palette="invert"].in-project-view .nav-tab,
+body[data-palette="invert"].in-project-view .nav-icon-link,
+body[data-palette="invert"].in-project-view .nav-tab-square {
+  color: #ffffff;
+}
+
+body[data-palette="invert"].in-project-view .nav-tab.active {
+  color: #ffffff !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+}
+
+body[data-palette="invert"] .desktop-project-strip {
+  background-color: #0a0a0a !important;
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body[data-palette="invert"] .p-title-display {
+  color: #ffffff !important;
+}
+
+body[data-palette="invert"] .strip-key {
+  color: #888888 !important;
+}
+
+body[data-palette="invert"] .strip-val {
+  color: #ffffff !important;
+}
+
+body[data-palette="invert"] .project-dot-indicator,
+body[data-palette="invert"] .project-progress-bar {
+  background-color: #ffffff !important;
+}
+
+body[data-palette="invert"] .details-drawer,
+body[data-palette="invert"] .bottom-sheet-drawer {
+  background-color: #0a0a0a;
+  border-left-color: rgba(255, 255, 255, 0.2);
+  border-top-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .spec-label {
+  color: #888888;
+}
+
+body[data-palette="invert"] .spec-value {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .drawer-project-desc {
+  color: #dddddd;
+}
+
+body[data-palette="invert"] .drawer-action-btn {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  font-weight: 700;
+}
+
+body[data-palette="invert"] #view-marmol {
+  background-color: #000000;
+}
+
+body[data-palette="invert"] .marmol-title {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .marmol-quote {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .marmol-body {
+  color: #cccccc;
+}
+
+body[data-palette="invert"] .marmol-heritage-brand {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .marmol-heritage-sub {
+  color: #888888;
+}
+
+body[data-palette="invert"] .marmol-ig-btn {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .marmol-ig-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body[data-palette="invert"] .marmol-subtitle {
+  color: #aaaaaa;
+}
+
+body[data-palette="invert"] .marmol-card-meta {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+body[data-palette="invert"] .marmol-card-title {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .marmol-card-desc {
+  color: #cccccc;
+}
+
+body[data-palette="invert"] .marmol-card-type {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .about-image-column {
+  background-color: #0a0a0a;
+}
+
+body[data-palette="invert"] .about-portrait {
+  filter: grayscale(100%) contrast(110%);
+}
+
+body[data-palette="invert"] .editorial-body,
+body[data-palette="invert"] .about-presence {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .portrait-signature-name {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .portrait-signature-role {
+  color: #cccccc;
+}
+
+body[data-palette="invert"] .portrait-signature-location {
+  color: #999999;
+}
+
+body[data-palette="invert"] .about-subtitle,
+body[data-palette="invert"] .about-disciplines,
+body[data-palette="invert"] .about-divider {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .about-quote {
+  color: #ffffff;
+  border-left-color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body[data-palette="invert"] .meta-info {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .meta-block .mono-label {
+  color: #ffffff;
+}
+
+body[data-palette="invert"] .mobile-nav-modal {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+body[data-palette="invert"] .modal-brand,
+body[data-palette="invert"] .modal-nav-link,
+body[data-palette="invert"] .modal-icon-link,
+body[data-palette="invert"] .mobile-nav-btn {
+  color: #ffffff !important;
+}
+
+body[data-palette="invert"] .modal-nav-link.active::after {
+  background-color: #ffffff;
+}
+
+body[data-palette="invert"] .grid-section-divider {
+  background-color: #111111 !important;
+  border-top-color: rgba(255, 255, 255, 0.2) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body[data-palette="invert"] .grid-section-divider-title {
+  color: #ffffff !important;
+}
+
+body[data-palette="invert"] .grid-small-project-card {
+  background-color: transparent !important;
+  border-right: none !important;
+  border-bottom-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body[data-palette="invert"] .grid-comparison-badge {
+  background: rgba(255, 255, 255, 0.92);
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Badge flotante del cursor en Modo Invertido: Fondo blanco puro con letras negras azabache */
+body[data-palette="invert"] .cursor-content {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+
+body[data-palette="invert"] .cursor-title {
+  color: #000000;
+  font-weight: 800;
+}
+
+body[data-palette="invert"] .cursor-sub {
+  color: #444444;
+  font-weight: 700;
+}
+
+/* Microinteracción botón de cambio de tema */
+.nav-theme-dot {
+  cursor: pointer;
+  border: 1px solid rgba(30, 21, 21, 0.2);
+  outline: none;
+  transition: transform 0.25s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.25s ease;
+}
+
+.nav-theme-dot:hover {
+  transform: scale(1.35);
+  box-shadow: 0 0 12px rgba(var(--color-primary-rgb), 0.45);
+}
