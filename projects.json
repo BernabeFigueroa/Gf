@@ -81,7 +81,8 @@
         "/images/arquitectura/buffalo/buffalo-3.webp",
         "/images/arquitectura/buffalo/buffalo-video.webm",
         "/images/arquitectura/buffalo/buffalo-1.webp",
-        "/images/arquitectura/buffalo/buffalo-2.webp"
+        "/images/arquitectura/buffalo/buffalo-2.webp",
+        "/images/arquitectura/buffalo/buffalo-4.webp"
       ],
       "desc_es": "Atmósfera arquitectónica dominada por la solidez y el carácter. Espacios fluidos donde conviven texturas minerales, maderas nobles e iluminación tenue de precisión.",
       "desc_en": "Architectural atmosphere dominated by solid character and textural depth. Continuous spaces articulated through mineral surfaces, noble wood, and disciplined lighting."
@@ -103,63 +104,49 @@
       "status": "BUILT",
       "photographer": "-",
       "heroImage": "/images/arquitectura/rosso/rosso-1.webp",
+      "homeImages": [
+        "/images/arquitectura/rosso/rosso-1.webp",
+        "/images/arquitectura/rosso/rosso-2.webp",
+        "/images/arquitectura/rosso/rosso-5.webp"
+      ],
       "gallery": [
         "/images/arquitectura/rosso/rosso-1.webp",
+        "/images/arquitectura/rosso/rosso-2.webp",
+        "/images/arquitectura/rosso/rosso-5.webp",
+        "/images/arquitectura/rosso/rosso-3.webp",
+        "/images/arquitectura/rosso/rosso-4.webp",
         "/images/arquitectura/rosso/rosso-video.webm"
       ],
       "desc_es": "Intervención de interiorismo y composición espacial. Diálogo cromático refinado y protagonismo absoluto de la luz natural sobre superficies pulidas y texturadas.",
       "desc_en": "Interior architecture and spatial composition. Refined chromatic resonance and deliberate daylight orchestration across polished mineral textures."
     },
     {
-      "id": "casa-pedregal",
-      "title": "CASA PEDREGAL",
-      "category": "arquitectura",
-      "year": "2024",
-      "location_es": "CIUDAD DE MÉXICO, MX",
-      "location_en": "MEXICO CITY, MX",
-      "location": "MÉXICO",
-      "surface": "680 M²",
-      "type_es": "RESIDENCIAL",
-      "type_en": "RESIDENTIAL",
-      "type": "ARQUITECTURA",
-      "status_es": "CONSTRUIDO",
-      "status_en": "BUILT",
-      "status": "BUILT",
-      "photographer": "RAFAEL GAMO",
-      "heroImage": "/images/projects/casa-pedregal-hero.webp",
+      "id": "consultorio",
+      "title": "CONSULTORIO ODONTOLÓGICO",
+      "category": "comercial",
+      "year": "2026",
+      "location_es": "ARGENTINA",
+      "location_en": "ARGENTINA",
+      "location": "ARGENTINA",
+      "surface": "-",
+      "type_es": "ARQUITECTURA & INTERIORES",
+      "type_en": "ARCHITECTURE & INTERIORS",
+      "type": "ARQUITECTURA & INTERIORES",
+      "status_es": "EN CONSTRUCCIÓN",
+      "status_en": "UNDER CONSTRUCTION",
+      "status": "UNDER CONSTRUCTION",
+      "photographer": "-",
+      "heroImage": "/images/arquitectura/Consultorio/consultorio-1.webp",
+      "showInHome": false,
       "gallery": [
-        "/images/projects/casa-pedregal-gallery-1.webp",
-        "/images/projects/casa-pedregal-gallery-2.webp",
-        "/images/projects/casa-pedregal-gallery-3.webp",
-        "/images/projects/casa-pedregal-gallery-4.webp"
+        "/images/arquitectura/Consultorio/consultorio-1.webp",
+        "/images/arquitectura/Consultorio/consultorio-2.webp",
+        "/images/arquitectura/Consultorio/consultorio-3.webp",
+        "/images/arquitectura/Consultorio/consultorio-4.webp",
+        "/images/arquitectura/Consultorio/consultorio-video.webm"
       ],
-      "desc_es": "Monolito de tierra volcánica y basalto negro. El programa se articula mediante patios de sombra profunda, concreto enduelado y carpinterías macizas.",
-      "desc_en": "An earthen volcanic basalt monolith. Domestic rituals organize around deep shadow patios, board-formed concrete, and charred pine millwork."
-    },
-    {
-      "id": "pabellon-umbria",
-      "title": "PABELLÓN UMBRÍA",
-      "category": "arquitectura",
-      "year": "2023",
-      "location_es": "VALLE DE BRAVO, MX",
-      "location_en": "VALLE DE BRAVO, MX",
-      "location": "VALLE DE BRAVO",
-      "surface": "420 M²",
-      "type_es": "RESIDENCIAL",
-      "type_en": "RESIDENTIAL",
-      "type": "ARQUITECTURA",
-      "status_es": "CONSTRUIDO",
-      "status_en": "BUILT",
-      "status": "BUILT",
-      "photographer": "CÉSAR BÉJAR",
-      "heroImage": "/images/projects/pabellon-umbria-hero.webp",
-      "gallery": [
-        "/images/projects/pabellon-umbria-gallery-1.webp",
-        "/images/projects/pabellon-umbria-gallery-2.webp",
-        "/images/projects/pabellon-umbria-gallery-3.webp"
-      ],
-      "desc_es": "Refugio silencioso entre pinos y encinos. Un basamento continuo de piedra caliza sostiene losas delgadas de hormigón que parecen levitar sobre el terreno.",
-      "desc_en": "A silent refuge amidst pine forests. A continuous limestone plinth supports slender concrete slabs that hover weightlessly above ground."
+      "desc_es": "Intervención de arquitectura e interiorismo para consultorio odontológico de alta gama. Espacio diseñado bajo premisas de calidez, funcionalidad y materialidad refinada. Actualmente en fase de obra.",
+      "desc_en": "High-end dental clinic architecture and interior design project. Spatial intervention articulated around warmth, clinical functionality, and refined materiality. Currently under construction."
     }
   ],
   "marmol": [
@@ -190,9 +177,9 @@
     },
     {
       "id": "mesada-marmol-2",
-      "title_es": "REVESTIMIENTO INTEGRAL & DETALLE MINERAL",
-      "title_en": "INTEGRATED COUNTERTOP & MINERAL DETAILS",
-      "title": "REVESTIMIENTO INTEGRAL & DETALLE MINERAL",
+      "title_es": "REVESTIMIENTO INTEGRAL",
+      "title_en": "INTEGRATED COUNTERTOP",
+      "title": "REVESTIMIENTO INTEGRAL",
       "type_es": "REVESTIMIENTOS",
       "type_en": "CLADDING & SURFACES",
       "type": "REVESTIMIENTOS",

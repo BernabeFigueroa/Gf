@@ -408,6 +408,13 @@ function updateViewTheme(viewId, targetTab = null) {
     }
   }
 
+  const isResidencial = viewId === 'grid' && targetTab === 'residencial';
+  if (isResidencial) {
+    document.body.classList.add('view-residencial-active');
+  } else {
+    document.body.classList.remove('view-residencial-active');
+  }
+
   const isHeaderBarView = viewId === 'marmol' || viewId === 'about';
   if (isHeaderBarView) {
     document.body.classList.add('view-header-bar');
@@ -436,7 +443,8 @@ function renderHomeSlideshow() {
   if (!slideshowTrack) return;
   slideshowTrack.innerHTML = '';
 
-  ARCHITECTURE_DATA.forEach((project, index) => {
+  const homeProjects = ARCHITECTURE_DATA.filter(p => p.showInHome !== false);
+  homeProjects.forEach((project, index) => {
     const projType = currentLang === 'ES' ? (project.type_es || project.type) : (project.type_en || project.type);
     const projLoc = currentLang === 'ES' ? (project.location_es || project.location) : (project.location_en || project.location);
 
@@ -542,7 +550,7 @@ function setupInfiniteScroll() {
 /* --------------------------------------------------------------------------
    6. VIEW 2: CATEGORY FILTERING & HOVER SLIDESHOW
    -------------------------------------------------------------------------- */
-function filterProjects(category) {
+function populateProjectsGrid(category) {
   const gridContainer = document.getElementById('projects-grid');
   if (!gridContainer) return;
 
@@ -585,7 +593,7 @@ function filterProjects(category) {
     card.appendChild(overlay);
 
     // Hover cycling photos (solo imágenes estáticas, filtrando videos para evitar errores)
-    const allPhotos = [project.heroImage, ...(project.gallery || [])].filter(url => 
+    const allPhotos = [project.heroImage, ...(project.gallery || [])].filter(url =>
       typeof url === 'string' && !url.endsWith('.webm') && !url.endsWith('.mp4')
     );
     let photoIndex = 0;
@@ -622,7 +630,7 @@ function filterProjects(category) {
     // 1. Barra pegada que cruza toda la pantalla
     const divider = document.createElement('div');
     divider.className = 'grid-section-divider';
-    
+
     const dividerTitle = document.createElement('span');
     dividerTitle.className = 'grid-section-divider-title';
     dividerTitle.setAttribute('data-i18n', 'section_small_projects');
@@ -704,9 +712,35 @@ function filterProjects(category) {
 
     gridContainer.appendChild(smallProjectsRow);
   }
+}
+
+let filterTransitionTimer = null;
+
+function filterProjects(category) {
+  const gridContainer = document.getElementById('projects-grid');
+  if (!gridContainer) return;
 
   const activeTabName = category === 'all' ? 'projects' : category;
-  navigateTo('grid', activeTabName);
+  const targetPanel = document.getElementById('view-grid');
+
+  // Si ya estamos navegando en la grilla, aplicamos el desvanecimiento suave (fade-out -> swap -> fade-in)
+  if (currentView === 'grid') {
+    if (filterTransitionTimer) clearTimeout(filterTransitionTimer);
+    gridContainer.classList.add('grid-fade-out');
+
+    filterTransitionTimer = setTimeout(() => {
+      populateProjectsGrid(category);
+      if (targetPanel) targetPanel.scrollTo({ top: 0, behavior: 'instant' });
+      navigateTo('grid', activeTabName);
+      void gridContainer.offsetWidth; // Forzar reflujo de render
+      gridContainer.classList.remove('grid-fade-out');
+    }, 140);
+  } else {
+    // Si venimos de otra vista (home, mármol, sobre mí), poblamos y navegamos directamente
+    populateProjectsGrid(category);
+    navigateTo('grid', activeTabName);
+    gridContainer.classList.remove('grid-fade-out');
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -742,7 +776,7 @@ function openProject(projectId) {
     project.gallery.forEach(mediaUrl => {
       const slide = document.createElement('div');
       slide.className = 'project-img-slide';
-      
+
       if (mediaUrl.endsWith('.webm') || mediaUrl.endsWith('.mp4')) {
         const vid = document.createElement('video');
         vid.src = mediaUrl;
@@ -968,12 +1002,12 @@ const UI_TRANSLATIONS = {
     EN: 'STONE AS ARCHITECTURE'
   },
   marmol_quote: {
-    ES: '“NO SÓLO ESPECIFICO PIEDRA. DISEÑO CON ELLA”',
+    ES: '“NO SÓLO CORTAMOS PIEDRA. TRABAJAMOS CON ELLA”',
     EN: '“I DON’T JUST SPECIFY STONE. I DESIGN WITH IT”'
   },
   marmol_body: {
-    ES: 'La piedra se incorpora a mis proyectos como arquitectura, mobiliario y detalle — desde mesas monolíticas y vanities escultóricos hasta cocinas, barras, muros y elementos a medida.',
-    EN: 'Stone is incorporated into my projects as architecture, furniture and detail — from monolithic tables and sculptural vanities to kitchens, bars, walls and bespoke elements.'
+    ES: 'La piedra se incorpora a mis proyectos como arquitectura, mobiliario y detalle — desde mesas monolíticas y lavamanos escultóricos hasta cocinas integradas, barras, muros y elementos a medida.',
+    EN: 'Stone is incorporated into my projects as architecture, furniture and detail — from monolithic tables and sculptural vanitorys to integrated kitchens, bars, walls and bespoke elements.'
   },
   marmol_heritage_brand: {
     ES: 'MARMOLERÍA FRONTINI',
@@ -1214,6 +1248,7 @@ function cycleColorPalette() {
 
 function updateAboutContent() {
   const manifestoTitle = document.getElementById('about-manifesto-title');
+  const subtitle = document.getElementById('about-subtitle');
   const bio1 = document.getElementById('about-bio-p1');
   const bio2 = document.getElementById('about-bio-p2');
   const btnText = document.getElementById('btn-text-lang');
@@ -1224,6 +1259,12 @@ function updateAboutContent() {
     manifestoTitle.textContent = currentLang === 'ES'
       ? (CONTENT_I18N.manifesto_title_es || 'GIOVANNI FRONTINI')
       : (CONTENT_I18N.manifesto_title_en || 'GIOVANNI FRONTINI');
+  }
+
+  if (subtitle) {
+    subtitle.textContent = currentLang === 'ES'
+      ? (CONTENT_I18N.subtitle_es || 'Arquitecto & Diseñador de Interiores')
+      : (CONTENT_I18N.subtitle_en || 'Architect & Interior Designer');
   }
 
   if (bio1) {

@@ -11,11 +11,33 @@
   background-color: var(--cp-50);
 }
 
+/* Espacio superior para que el header sólido no tape los pequeños proyectos */
+body.view-residencial-active #view-grid {
+  padding-top: 4.8rem !important;
+  padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+@media (min-width: 768px) {
+  body.view-residencial-active #view-grid {
+    padding-top: 5.6rem !important;
+  }
+}
+
 .editorial-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   width: 100%;
   border-bottom: 1px solid var(--cp-100);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.editorial-grid.grid-fade-out {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.14s ease-out, transform 0.14s ease-out;
 }
 
 @media (min-width: 768px) {
@@ -38,6 +60,18 @@
   cursor: pointer;
   background-color: var(--cp-100);
   aspect-ratio: 4/3;
+  animation: editorialFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes editorialFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .grid-card-img {
@@ -93,6 +127,7 @@
   border-top: 1px solid rgba(244, 151, 149, 0.25);
   border-bottom: 1px solid rgba(244, 151, 149, 0.25);
   box-sizing: border-box;
+  animation: editorialFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 .grid-section-divider-title {
@@ -114,6 +149,7 @@
   align-items: stretch;
   gap: 0;
   border-bottom: 1px solid var(--cp-100);
+  animation: editorialFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 /* Small project card: flush to the left, tightly wrapping its content */
