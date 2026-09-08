@@ -95,7 +95,20 @@ async function loadProjectsData() {
 /* --------------------------------------------------------------------------
    2. INITIALIZATION & DECLARATIVE EVENT BINDINGS
    -------------------------------------------------------------------------- */
+function ensureViewportReset() {
+  if (window.scrollY !== 0 || window.scrollX !== 0) {
+    window.scrollTo(0, 0);
+  }
+  if (document.documentElement.scrollTop !== 0) {
+    document.documentElement.scrollTop = 0;
+  }
+  if (document.body && document.body.scrollTop !== 0) {
+    document.body.scrollTop = 0;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
+  ensureViewportReset();
   initSplashScreen();
   initializePalette();
   await loadProjectsData();
@@ -109,7 +122,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   animateLogoTracking();
   updateAboutContent();
   updateViewTheme('home');
+  ensureViewportReset();
 });
+
+window.addEventListener('load', () => {
+  ensureViewportReset();
+});
+
+window.addEventListener('resize', () => {
+  ensureViewportReset();
+});
+
+window.addEventListener('orientationchange', () => {
+  setTimeout(ensureViewportReset, 100);
+});
+
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    ensureViewportReset();
+  });
+}
 
 function initSplashScreen() {
   const splash = document.getElementById('intro-splash');
@@ -118,6 +150,7 @@ function initSplashScreen() {
   // Si ya se mostró en esta sesión, lo removemos de inmediato
   if (sessionStorage.getItem('gf_intro_shown')) {
     splash.remove();
+    ensureViewportReset();
     return;
   }
 
@@ -126,6 +159,7 @@ function initSplashScreen() {
     splash.classList.add('fade-out');
     setTimeout(() => {
       splash.remove();
+      ensureViewportReset();
     }, 950);
   };
 
@@ -222,6 +256,16 @@ function setupGlobalActionListeners() {
     }
   });
 
+  // Cerrar menú modal al hacer tap/click en el fondo desenfocado
+  const mobileNavModal = document.getElementById('mobile-nav-modal');
+  if (mobileNavModal) {
+    mobileNavModal.addEventListener('click', (e) => {
+      if (e.target === mobileNavModal || e.target.classList.contains('modal-links-container')) {
+        closeMobileMenu();
+      }
+    });
+  }
+
   setupContactForm();
 }
 
@@ -258,6 +302,10 @@ function closeContactModal() {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
   }
+  if (document.activeElement && typeof document.activeElement.blur === 'function') {
+    document.activeElement.blur();
+  }
+  ensureViewportReset();
 }
 
 function setupContactForm() {
@@ -583,7 +631,11 @@ function filterProjects(category) {
     divider.appendChild(dividerTitle);
     gridContainer.appendChild(divider);
 
-    // 2. Render de cada item de pequeños proyectos (ej. el baño en mármol)
+    // Contenedor que agrupa a los pequeños proyectos de forma pegada uno a la par del otro
+    const smallProjectsRow = document.createElement('div');
+    smallProjectsRow.className = 'small-projects-row';
+
+    // 2. Render de cada item de pequeños proyectos (ej. el baño en mármol y showroom)
     SMALL_PROJECTS_DATA.forEach((item) => {
       const smallCard = document.createElement('div');
       smallCard.className = 'grid-small-project-card';
@@ -638,21 +690,19 @@ function filterProjects(category) {
         updateCompareState(false);
       });
 
-      // 2. En celular / touch: un clic para ver el antes, otro clic para ver el después, alternando
-      // En desktop: al hacer clic abre el modal con los detalles del proyecto sin abrir otra página
+      // 2. En celular (< 768px): un clic para alternar entre antes y después.
+      // En PC / escritorio: el clic NO alterna (en PC funciona exclusivamente con hover al pasar el mouse)
       smallCard.addEventListener('click', (e) => {
-        const isTouch = window.innerWidth < 768 || ('ontouchstart' in window);
-        if (isTouch) {
+        if (window.innerWidth < 768) {
           e.preventDefault();
           updateCompareState(!isShowingBefore);
-        } else {
-          // En computadora, si hace clic abre el modal de detalles
-          openProjectDetailsModal(item);
         }
       });
 
-      gridContainer.appendChild(smallCard);
+      smallProjectsRow.appendChild(smallCard);
     });
+
+    gridContainer.appendChild(smallProjectsRow);
   }
 
   const activeTabName = category === 'all' ? 'projects' : category;
@@ -713,6 +763,10 @@ function openProject(projectId) {
       track.appendChild(slide);
     });
     track.scrollTo({ left: 0, top: 0, behavior: 'instant' });
+    const wrapper = document.querySelector('.project-view-wrapper');
+    if (wrapper) {
+      wrapper.scrollTop = 0;
+    }
   }
 
   // Populate Desktop Strip
@@ -1109,8 +1163,19 @@ function applyColorPalette(paletteName) {
   const selected = paletteName === 'invert' ? 'invert' : 'default';
   currentPalette = selected;
   currentPaletteIndex = PALETTES.indexOf(selected);
+  document.documentElement.setAttribute('data-palette', selected);
   document.body.setAttribute('data-palette', selected);
   localStorage.setItem('gf_portfolio_palette', selected);
+
+  // Synchronize Safari iOS and mobile browser theme-color
+  const themeColor = selected === 'invert' ? '#000000' : '#2d1615';
+  let themeMeta = document.querySelector('meta[name="theme-color"]');
+  if (!themeMeta) {
+    themeMeta = document.createElement('meta');
+    themeMeta.setAttribute('name', 'theme-color');
+    document.head.appendChild(themeMeta);
+  }
+  themeMeta.setAttribute('content', themeColor);
 
   // Update knob indicator in mobile modal
   const knob = document.querySelector('.theme-switch-knob');

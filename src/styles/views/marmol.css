@@ -4,8 +4,9 @@
 
 #view-marmol {
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  background-color: var(--cp-50);
+  background-color: var(--color-light-bg);
 }
 
 .marmol-viewport {
@@ -46,18 +47,25 @@
 
 /* Intermezzo Editorial en el medio de la sección */
 .marmol-intermezzo {
-  grid-column: span 12;
+  width: 100%;
   padding: 4rem 1rem 3.5rem;
   margin: 1.5rem 0;
   border-top: 1px solid rgba(var(--color-primary-rgb), 0.15);
   border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.15);
   max-width: 960px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
   .marmol-intermezzo {
     padding: 5rem 2rem 4.5rem;
     margin: 2.5rem 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .marmol-intermezzo {
+    grid-column: span 12;
   }
 }
 
@@ -86,7 +94,8 @@
 
 /* Footer / Cierre con Marmolería Frontini y Botón de Instagram */
 .marmol-footer-block {
-  grid-column: span 12;
+  width: 100%;
+  box-sizing: border-box;
   margin-top: 2rem;
   padding: 3.5rem 1.5rem;
   background-color: rgba(var(--color-primary-rgb), 0.04);
@@ -103,6 +112,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 3rem 2.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .marmol-footer-block {
+    grid-column: span 12;
   }
 }
 
@@ -157,9 +172,18 @@
 
 .marmol-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 3rem 2.5rem;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 100%;
   align-items: start;
+}
+
+@media (min-width: 992px) {
+  .marmol-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3rem 2.5rem;
+  }
 }
 
 .marmol-card-video,
@@ -172,11 +196,11 @@
   border: none !important;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .marmol-card-video {
-  grid-column: span 12;
-  background-color: transparent;
   align-items: center;
 }
 
@@ -197,11 +221,15 @@
 }
 
 .marmol-card-wide {
-  grid-column: span 12;
+  width: 100%;
 }
 
 @media (min-width: 992px) {
   .marmol-card-wide {
+    grid-column: span 6;
+  }
+
+  .marmol-card-video + .marmol-card-wide {
     grid-column: span 5;
   }
 }
@@ -209,9 +237,11 @@
 .marmol-card-wide img,
 .marmol-card-tall img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   max-height: 540px;
   object-fit: contain;
+  margin: 0 auto;
   background-color: transparent;
   display: block;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -223,7 +253,7 @@
 }
 
 .marmol-card-comparison {
-  grid-column: span 12;
+  width: 100%;
 }
 
 @media (min-width: 992px) {
@@ -235,16 +265,20 @@
 .comparison-wrapper {
   position: relative;
   width: 100%;
+  max-width: 100%;
   height: auto;
   background-color: transparent;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .comparison-img {
   width: 100%;
+  max-width: 100%;
   height: auto;
   max-height: 520px;
   object-fit: contain;
+  margin: 0 auto;
   display: block;
 }
 

@@ -18,9 +18,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content">
   <title>{title}</title>
   <meta name="description" content={description}>
+  <meta name="theme-color" content="#2d1615">
+
+  <!-- Immediate Theme & Palette Initialization to prevent Safari bar color flash -->
+  <script is:inline>
+    (function() {
+      try {
+        var p = localStorage.getItem('gf_portfolio_palette');
+        if (p === 'invert') {
+          document.documentElement.setAttribute('data-palette', 'invert');
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', '#000000');
+        }
+      } catch(e) {}
+    })();
+  </script>
 
   <!-- Preload Custom Editorial Font -->
   <link rel="preload" href={`${base}/font/Patinio Basica.ttf`} as="font" type="font/ttf" crossorigin>

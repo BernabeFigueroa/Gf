@@ -23,7 +23,7 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  min-height: calc(100vh - 140px);
+  min-height: calc(100dvh - 140px);
   border-top: var(--border-hairline);
   border-bottom: var(--border-hairline);
 }

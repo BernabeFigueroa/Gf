@@ -12,6 +12,10 @@ body, .view-panel, .fixed-bottom-nav, .details-drawer, .bottom-sheet-drawer,
 /* --------------------------------------------------------------------------
    1. MODO ORIGINAL: Marrón & Rosa
    -------------------------------------------------------------------------- */
+:root,
+:root[data-palette="default"],
+html,
+html[data-palette="default"],
 body,
 body[data-palette="default"] {
   background-color: #2d1615;
@@ -264,6 +268,18 @@ body[data-palette="default"] .mobile-nav-btn {
   color: #f7b2b0 !important;
 }
 
+body[data-palette="default"] .modal-lang-pill {
+  color: #f49795 !important;
+  border-color: #f49795 !important;
+  background: transparent;
+}
+
+body[data-palette="default"] .modal-lang-pill:hover,
+body[data-palette="default"] .modal-lang-pill:active {
+  background: #f49795 !important;
+  color: #24100f !important;
+}
+
 body[data-palette="default"] .modal-nav-link.active::after {
   background-color: #f49795;
 }
@@ -286,6 +302,8 @@ body[data-palette="default"] .cursor-sub {
 /* --------------------------------------------------------------------------
    2. MODO INVERTIDO: Puro Blanco & Negro
    -------------------------------------------------------------------------- */
+:root[data-palette="invert"],
+html[data-palette="invert"],
 body[data-palette="invert"] {
   --color-primary-dark: #ffffff;
   --color-primary-rgb: 255, 255, 255;
@@ -375,6 +393,21 @@ body[data-palette="invert"] .nav-theme-dot {
   background-color: #ffffff !important;
   border: 1.5px solid #000000 !important;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
+}
+
+body[data-palette="invert"].in-project-view .fixed-top-header {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.35) 55%,
+    transparent 100%
+  );
+}
+
+@media (min-width: 768px) {
+  body[data-palette="invert"].in-project-view .fixed-top-header {
+    background: none;
+  }
 }
 
 body[data-palette="invert"].in-project-view .fixed-bottom-nav {
@@ -552,6 +585,18 @@ body[data-palette="invert"] .modal-nav-link,
 body[data-palette="invert"] .modal-icon-link,
 body[data-palette="invert"] .mobile-nav-btn {
   color: #ffffff !important;
+}
+
+body[data-palette="invert"] .modal-lang-pill {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  background: transparent;
+}
+
+body[data-palette="invert"] .modal-lang-pill:hover,
+body[data-palette="invert"] .modal-lang-pill:active {
+  background: #ffffff !important;
+  color: #000000 !important;
 }
 
 body[data-palette="invert"] .modal-nav-link.active::after {

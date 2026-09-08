@@ -104,20 +104,34 @@
   color: var(--color-primary-dark, #fca5a5);
 }
 
-/* Small project card: occupies normal grid column (1 col), aligned flush to the left, no side borders */
+/* Container for small projects: full width row, flush aligned to the left */
+.small-projects-row {
+  grid-column: 1 / -1;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  border-bottom: 1px solid var(--cp-100);
+}
+
+/* Small project card: flush to the left, tightly wrapping its content */
 .grid-small-project-card {
   position: relative;
-  border-right: none !important;
-  border-bottom: 1px solid var(--cp-100);
+  border-right: 1px solid var(--cp-100);
+  border-bottom: none;
   background-color: transparent !important;
   cursor: pointer;
   user-select: none;
   overflow: hidden;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 100%;
+  width: auto;
+  flex: 0 0 auto;
+  box-sizing: border-box;
 }
 
 .grid-comparison-stage {
@@ -150,6 +164,30 @@
   display: block;
   transition: opacity 0.35s ease-in-out;
   pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .small-projects-row {
+    flex-direction: column;
+  }
+
+  .grid-small-project-card {
+    width: 100%;
+    border-right: none !important;
+    border-bottom: 1px solid var(--cp-100);
+  }
+
+  .grid-comparison-stage {
+    width: 100%;
+    display: block;
+  }
+
+  .grid-comparison-base {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+  }
 }
 
 /* Badge de Antes / Después en la esquina superior derecha dentro de la imagen */

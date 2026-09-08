@@ -172,5 +172,30 @@
       "desc_es": "Showroom de alta iluminación y diseño de interiores. Intervención cromática estricta en tonos ciruela, chocolate y acero inoxidable cepillado.",
       "desc_en": "High-end lighting and spatial design showroom. Strict tonal palette of plum-chocolate tones, warm stone, and satin-brushed stainless steel."
     }
+  ],
+  "small_projects": [
+    {
+      "id": "showroom-marmoleria-frontini",
+      "title_es": "SHOWROOM MARMOLERÍA FRONTINI — ANTES & DESPUÉS",
+      "title_en": "MARMOLERÍA FRONTINI SHOWROOM — BEFORE & AFTER",
+      "title": "SHOWROOM MARMOLERÍA FRONTINI — ANTES & DESPUÉS",
+      "type_es": "RENOVACIÓN / SHOWROOM",
+      "type_en": "RENOVATION / SHOWROOM",
+      "type": "RENOVACIÓN / SHOWROOM",
+      "year": "2024",
+      "location_es": "CONCEPCIÓN, TUCUMÁN",
+      "location_en": "CONCEPCION, TUCUMAN",
+      "location": "CONCEPCIÓN, TUCUMÁN",
+      "surface": "45 M²",
+      "status_es": "CONSTRUIDO",
+      "status_en": "BUILT",
+      "status": "BUILT",
+      "photographer": "GIOVANNI FRONTINI",
+      "image_before": "/images/AntesYDespues/MARMOLERIAFRONTINO/marmoleria-antes.webp",
+      "image_after": "/images/AntesYDespues/MARMOLERIAFRONTINO/marmoleria-despues.webp",
+      "image": "/images/AntesYDespues/MARMOLERIAFRONTINO/marmoleria-despues.webp",
+      "desc_es": "Transformación integral del showroom de Marmolería Frontini: isla monolítica en piedra negra, revestimiento marmóreo libro abierto y puesta en valor espacial.",
+      "desc_en": "Comprehensive transformation of Marmolería Frontini showroom: monolithic black stone island, bookmatched marble cladding, and spatial identity."
+    }
   ]
 }

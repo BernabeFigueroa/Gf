@@ -329,6 +329,7 @@ body.in-project-view .nav-tab.active {
   inset: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   z-index: 100;
   background: rgba(245, 240, 240, 0.68);
   backdrop-filter: blur(28px) saturate(160%);
@@ -336,7 +337,7 @@ body.in-project-view .nav-tab.active {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  padding: max(1.5rem, env(safe-area-inset-top, 0px)) max(1.5rem, env(safe-area-inset-right, 0px)) max(2rem, env(safe-area-inset-bottom, 0px)) max(1.5rem, env(safe-area-inset-left, 0px));
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
@@ -423,11 +424,12 @@ body.in-project-view .nav-tab.active {
   font-size: 11px;
   letter-spacing: 0.14em;
   font-weight: 600;
-  color: var(--cp-900);
+  color: #f49795;
   background: transparent;
-  border: 1px solid var(--cp-900);
+  border: 1px solid #f49795;
   padding: 3px 10px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .modal-theme-toggle {
@@ -452,8 +454,5 @@ body.in-project-view .nav-tab.active {
 }
 
 .modal-bottom-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0.5rem;
+  display: none !important;
 }

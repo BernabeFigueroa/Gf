@@ -2,9 +2,24 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>GIOVANNI FRONTINI — Architecture & Spatial Design</title>
   <meta name="description" content="Editorial architecture and spatial design portfolio for Giovanni Frontini. Residential, retail, and cultural architecture.">
+  <meta name="theme-color" content="#2d1615">
+
+  <!-- Immediate Theme & Palette Initialization to prevent Safari bar color flash -->
+  <script>
+    (function() {
+      try {
+        var p = localStorage.getItem('gf_portfolio_palette');
+        if (p === 'invert') {
+          document.documentElement.setAttribute('data-palette', 'invert');
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', '#000000');
+        }
+      } catch(e) {}
+    })();
+  </script>
 
   <!-- Preload Custom Editorial Font -->
   <link rel="preload" href="/Gf/font/Patinio Basica.ttf" as="font" type="font/ttf" crossorigin>
@@ -321,22 +336,6 @@
           <div class="theme-switch-knob"></div>
         </button>
       </div>
-    </div>
-
-    <div class="modal-bottom-bar">
-      <button class="mobile-nav-btn mail-icon-btn" data-action="open-contact-modal" aria-label="Contacto / Mensaje">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="mobile-bottom-svg">
-          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-        </svg>
-      </button>
-
-      <button class="mobile-nav-btn close-menu-btn" data-action="close-mobile-menu" aria-label="Cerrar menú">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mobile-bottom-svg">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
     </div>
   </div>
 

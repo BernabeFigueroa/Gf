@@ -88,21 +88,43 @@
 
 /* En vista de detalle de proyecto */
 body.in-project-view .fixed-top-header {
-  top: 1.25rem;
+  top: 0;
+  padding-top: max(0.85rem, env(safe-area-inset-top, 0px));
+  padding-bottom: 1.6rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(25, 12, 12, 0.72) 0%,
+    rgba(25, 12, 12, 0.35) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: background 0.3s ease;
 }
 
 @media (min-width: 768px) {
   body.in-project-view .fixed-top-header {
     top: 1.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: none;
   }
 }
 
 body.in-project-view .brand-title {
   mix-blend-mode: normal;
   color: var(--cp-950);
-  font-size: clamp(2rem, 4vw, 3.6rem);
-  letter-spacing: 0.14em;
+  font-size: clamp(1.35rem, 5.8vw, 1.85rem);
+  letter-spacing: 0.08em;
   font-weight: 800;
+  max-width: 92vw;
+}
+
+@media (min-width: 768px) {
+  body.in-project-view .brand-title {
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    letter-spacing: 0.14em;
+    max-width: 100%;
+  }
 }
 
 /* Cabecera con franja/header para secciones Mármol y Sobre Mí */
