@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'PatinioBasica';
-  src: url('/Gf/font/Patinio Basica.ttf') format('truetype');
+  src: url('/font/Patinio Basica.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'Patinio Basica';
-  src: url('/Gf/font/Patinio Basica.ttf') format('truetype');
+  src: url('/font/Patinio Basica.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
