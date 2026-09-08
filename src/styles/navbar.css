@@ -305,7 +305,9 @@ body.in-project-view .nav-tab.active {
     border: none;
     cursor: pointer;
     color: var(--cp-900);
-    padding: 8px;
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
     transition: transform 0.2s ease, opacity 0.2s ease;
     text-decoration: none;
   }
@@ -315,9 +317,9 @@ body.in-project-view .nav-tab.active {
   }
 
   .mobile-bottom-svg {
-    width: 24px;
-    height: 24px;
-    stroke-width: 2;
+    width: 28px;
+    height: 28px;
+    stroke-width: 1.9;
   }
 }
 

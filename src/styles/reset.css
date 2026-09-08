@@ -100,7 +100,11 @@ html, body {
 /* --------------------------------------------------------------------------
    CUSTOM EDITORIAL CURSOR: MONOGRAMA TIPOGRÁFICO PURO GF EN TODO EL SITIO
    -------------------------------------------------------------------------- */
-@media (min-width: 768px) {
+.custom-cursor {
+  display: none !important;
+}
+
+@media (min-width: 768px) and (hover: hover) and (pointer: fine) {
   /* Ocultar cursor predeterminado del sistema en desktop */
   body, 
   body a, 
@@ -116,7 +120,7 @@ html, body {
   }
 
   .custom-cursor {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     position: fixed;

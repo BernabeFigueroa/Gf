@@ -6,13 +6,13 @@
   overflow-y: auto;
   overflow-x: hidden;
   max-width: 100vw;
-  padding-top: max(4.5rem, env(safe-area-inset-top, 0px) + 2rem);
+  padding-top: max(4rem, env(safe-area-inset-top, 0px) + 3.2rem);
   padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 0px) + 6rem);
 }
 
 @media (min-width: 768px) {
   #view-about {
-    padding-top: 8rem;
+    padding-top: 5.2rem;
     padding-bottom: calc(var(--nav-height) + 7rem);
   }
 }
@@ -58,12 +58,18 @@
 }
 
 .portrait-caption {
+  display: none;
   padding: 1.25rem 1.5rem;
   background: transparent;
   border-top: var(--border-hairline);
-  display: flex;
   flex-direction: column;
   gap: 0.3rem;
+}
+
+@media (min-width: 900px) {
+  .portrait-caption {
+    display: flex;
+  }
 }
 
 .portrait-signature-name {
@@ -109,11 +115,13 @@
 }
 
 .about-name-title {
+  display: block;
   margin-bottom: 0.4rem;
   letter-spacing: 0.05em;
 }
 
 .about-subtitle {
+  display: block;
   font-family: var(--font-mono);
   font-size: 12px;
   text-transform: uppercase;
