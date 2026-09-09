@@ -254,6 +254,11 @@
 
 .marmol-card-comparison {
   width: 100%;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 @media (min-width: 992px) {
@@ -291,6 +296,12 @@
   object-fit: contain;
   display: block;
   transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+video.comparison-overlay-after {
+  object-fit: cover;
+  pointer-events: none;
 }
 
 .comparison-badge {
@@ -307,6 +318,21 @@
   backdrop-filter: blur(8px);
   z-index: 5;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1.2;
+}
+
+/* Hover en PC: fallback CSS */
+@media (hover: hover) and (pointer: fine) {
+  .marmol-card-comparison:hover .comparison-overlay-after {
+    opacity: 0 !important;
+  }
+}
+
+/* Estado activo / click para celular en marmol */
+.marmol-card-comparison.show-before .comparison-overlay-after {
+  opacity: 0 !important;
 }
 
 .marmol-card-meta {

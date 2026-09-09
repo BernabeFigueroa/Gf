@@ -30,7 +30,7 @@
     {
       "id": "binnis",
       "title": "BINNIS",
-      "category": "arquitectura",
+      "category": "comercial",
       "year": "2025",
       "location_es": "ARGENTINA",
       "location_en": "ARGENTINA",
@@ -63,7 +63,7 @@
     {
       "id": "buffalo",
       "title": "BUFFALO",
-      "category": "arquitectura",
+      "category": "comercial",
       "year": "2026",
       "location_es": "ARGENTINA",
       "location_en": "ARGENTINA",
@@ -90,7 +90,7 @@
     {
       "id": "rosso",
       "title": "ROSSO",
-      "category": "arquitectura",
+      "category": "comercial",
       "year": "2024",
       "location_es": "EE. UU.",
       "location_en": "USA",
@@ -200,20 +200,6 @@
       "desc_en": "Large-scale statement table crafted in high-performance Dekton stone, featuring mitered edges and minimalist geometry."
     },
     {
-      "id": "bano-transformacion",
-      "title_es": "TRANSFORMACIÓN MINERAL — ANTES & DESPUÉS",
-      "title_en": "MINERAL TRANSFORMATION — BEFORE & AFTER",
-      "title": "TRANSFORMACIÓN MINERAL — ANTES & DESPUÉS",
-      "type_es": "RENOVACIÓN / BAÑO",
-      "type_en": "RENOVATION / BATHROOM",
-      "type": "RENOVACIÓN / BAÑO",
-      "image_before": "/images/AntesYDespues/Baño/bano-despues.webp",
-      "image_after": "/images/AntesYDespues/Baño/bano-antes.webp",
-      "image": "/images/AntesYDespues/Baño/bano-antes.webp",
-      "desc_es": "Evolución integral de espacio húmedo: sustitución por revestimientos marmóreos de gran formato y líneas puras.",
-      "desc_en": "Comprehensive wet room evolution: replacing legacy surfaces with large-format pure marble slabs."
-    },
-    {
       "id": "cocina-integral-4",
       "title_es": "MESADA DE COCINA & MOBILIARIO A MEDIDA",
       "title_en": "CUSTOM KITCHEN COUNTERTOP & INTEGRATED JOINERY",
@@ -251,6 +237,20 @@
   ],
   "small_projects": [
     {
+      "id": "bano-transformacion",
+      "title_es": "TRANSFORMACIÓN MINERAL — ANTES & DESPUÉS",
+      "title_en": "MINERAL TRANSFORMATION — BEFORE & AFTER",
+      "title": "TRANSFORMACIÓN MINERAL — ANTES & DESPUÉS",
+      "type_es": "RENOVACIÓN / BAÑO",
+      "type_en": "RENOVATION / BATHROOM",
+      "type": "RENOVACIÓN / BAÑO",
+      "image_before": "/images/AntesYDespues/Baño/bano-antes.webp",
+      "image_after": "/images/AntesYDespues/Baño/bano-despues.webp",
+      "image": "/images/AntesYDespues/Baño/bano-despues.webp",
+      "desc_es": "Evolución integral de espacio húmedo: sustitución por revestimientos marmóreos de gran formato y líneas puras.",
+      "desc_en": "Comprehensive wet room evolution: replacing legacy surfaces with large-format pure marble slabs."
+    },
+    {
       "id": "showroom-marmoleria-frontini",
       "title_es": "SHOWROOM MARMOLERÍA FRONTINI — ANTES & DESPUÉS",
       "title_en": "MARMOLERÍA FRONTINI SHOWROOM — BEFORE & AFTER",
@@ -272,6 +272,21 @@
       "image": "/images/AntesYDespues/MARMOLERIAFRONTINO/marmoleria-despues.webp",
       "desc_es": "Transformación integral del showroom de Marmolería Frontini: isla monolítica en piedra negra, revestimiento marmóreo libro abierto y puesta en valor espacial.",
       "desc_en": "Comprehensive transformation of Marmolería Frontini showroom: monolithic black stone island, bookmatched marble cladding, and spatial identity."
+    },
+    {
+      "id": "super-minimarket",
+      "title_es": "MINIMARKET X&P — ANTES & DESPUÉS",
+      "title_en": "X&P MINIMARKET — BEFORE & AFTER",
+      "title": "MINIMARKET X&P — ANTES & DESPUÉS",
+      "type_es": "RENOVACIÓN / COMERCIAL",
+      "type_en": "RENOVATION / COMMERCIAL",
+      "type": "RENOVACIÓN / COMERCIAL",
+      "image_before": "/images/AntesYDespues/Super/super-antes.webp",
+      "video_after": "/images/AntesYDespues/Super/super-despues.webm",
+      "image_after": "/images/AntesYDespues/Super/super-despues.webm",
+      "image": "/images/AntesYDespues/Super/super-despues.webm",
+      "desc_es": "Reconversión y puesta en valor de cochera en minimarket comercial con mobiliario a medida e iluminación lineal.",
+      "desc_en": "Transformation of a residential garage into a contemporary commercial minimarket with custom shelving and lighting."
     }
   ]
 }

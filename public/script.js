@@ -64,6 +64,7 @@ function prefixMarmolItem(item) {
   if (m.image) m.image = prefixPath(m.image);
   if (m.image_before) m.image_before = prefixPath(m.image_before);
   if (m.image_after) m.image_after = prefixPath(m.image_after);
+  if (m.video_after) m.video_after = prefixPath(m.video_after);
   if (m.video) m.video = prefixPath(m.video);
   if (m.thumbnail) m.thumbnail = prefixPath(m.thumbnail);
   return m;
@@ -558,7 +559,7 @@ function populateProjectsGrid(category) {
 
   const filtered = category === 'all'
     ? ARCHITECTURE_DATA
-    : ARCHITECTURE_DATA.filter(p => p.category === category);
+    : ARCHITECTURE_DATA.filter(p => p.category === category || (category === 'comercial' && p.category === 'arquitectura'));
 
   filtered.forEach((project, index) => {
     const card = document.createElement('div');
@@ -657,19 +658,31 @@ function populateProjectsGrid(category) {
       imgBefore.className = 'grid-comparison-base';
       imgBefore.loading = 'lazy';
 
-      const imgAfter = document.createElement('img');
-      imgAfter.src = item.image_after;
-      imgAfter.alt = 'Después';
-      imgAfter.className = 'grid-comparison-overlay-img';
-      imgAfter.loading = 'lazy';
-      imgAfter.style.opacity = '1';
+      let afterElem;
+      const isVideoAfter = item.video_after || (item.image_after && (item.image_after.endsWith('.webm') || item.image_after.endsWith('.mp4')));
+      if (isVideoAfter) {
+        afterElem = document.createElement('video');
+        afterElem.src = item.video_after || item.image_after;
+        afterElem.autoplay = true;
+        afterElem.loop = true;
+        afterElem.muted = true;
+        afterElem.playsInline = true;
+        afterElem.className = 'grid-comparison-overlay-img grid-comparison-overlay-video';
+      } else {
+        afterElem = document.createElement('img');
+        afterElem.src = item.image_after;
+        afterElem.alt = 'Después';
+        afterElem.className = 'grid-comparison-overlay-img';
+        afterElem.loading = 'lazy';
+      }
+      afterElem.style.opacity = '1';
 
       const badge = document.createElement('div');
       badge.className = 'grid-comparison-badge';
       badge.textContent = isEs ? 'DESPUÉS' : 'AFTER';
 
       stage.appendChild(imgBefore);
-      stage.appendChild(imgAfter);
+      stage.appendChild(afterElem);
       stage.appendChild(badge);
       smallCard.appendChild(stage);
 
@@ -680,11 +693,11 @@ function populateProjectsGrid(category) {
         isShowingBefore = showBefore;
         if (showBefore) {
           smallCard.classList.add('show-before');
-          imgAfter.style.opacity = '0';
+          afterElem.style.opacity = '0';
           badge.textContent = currentLang === 'ES' ? 'ESTADO ANTERIOR' : 'BEFORE STATE';
         } else {
           smallCard.classList.remove('show-before');
-          imgAfter.style.opacity = '1';
+          afterElem.style.opacity = '1';
           badge.textContent = currentLang === 'ES' ? 'DESPUÉS' : 'AFTER';
         }
       }
@@ -698,10 +711,10 @@ function populateProjectsGrid(category) {
         updateCompareState(false);
       });
 
-      // 2. En celular (< 768px): un clic para alternar entre antes y después.
+      // 2. En celular (< 992px o dispositivos táctiles): un clic para alternar entre antes y después.
       // En PC / escritorio: el clic NO alterna (en PC funciona exclusivamente con hover al pasar el mouse)
       smallCard.addEventListener('click', (e) => {
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 992 || window.matchMedia('(hover: none)').matches) {
           e.preventDefault();
           updateCompareState(!isShowingBefore);
         }
@@ -1002,7 +1015,7 @@ const UI_TRANSLATIONS = {
     EN: 'STONE AS ARCHITECTURE'
   },
   marmol_quote: {
-    ES: '“NO SÓLO CORTAMOS PIEDRA. TRABAJAMOS CON ELLA”',
+    ES: '“NO SÓLO CORTAMOS PIEDRA. DISEÑO CON ELLA”',
     EN: '“I DON’T JUST SPECIFY STONE. I DESIGN WITH IT”'
   },
   marmol_body: {
@@ -1347,7 +1360,7 @@ function renderMarmolShowcase() {
       video.playsInline = true;
       video.className = 'marmol-video-element';
       card.appendChild(video);
-    } else if (item.image_before && item.image_after) {
+    } else if (item.image_before && (item.image_after || item.video_after)) {
       card.className = 'marmol-card-comparison';
       const wrapper = document.createElement('div');
       wrapper.className = 'comparison-wrapper';
@@ -1357,10 +1370,22 @@ function renderMarmolShowcase() {
       imgBefore.alt = 'Antes';
       imgBefore.className = 'comparison-img';
 
-      const imgAfter = document.createElement('img');
-      imgAfter.src = item.image_after;
-      imgAfter.alt = 'Después';
-      imgAfter.className = 'comparison-overlay-after';
+      let imgAfter;
+      const isVideoAfter = item.video_after || (item.image_after && (item.image_after.endsWith('.webm') || item.image_after.endsWith('.mp4')));
+      if (isVideoAfter) {
+        imgAfter = document.createElement('video');
+        imgAfter.src = item.video_after || item.image_after;
+        imgAfter.autoplay = true;
+        imgAfter.loop = true;
+        imgAfter.muted = true;
+        imgAfter.playsInline = true;
+        imgAfter.className = 'comparison-overlay-after comparison-overlay-video';
+      } else {
+        imgAfter = document.createElement('img');
+        imgAfter.src = item.image_after;
+        imgAfter.alt = 'Después';
+        imgAfter.className = 'comparison-overlay-after';
+      }
       imgAfter.style.opacity = '1';
 
       const badge = document.createElement('div');
@@ -1371,13 +1396,33 @@ function renderMarmolShowcase() {
       wrapper.appendChild(imgAfter);
       wrapper.appendChild(badge);
 
+      let isShowingBefore = false;
+
+      function updateCompareState(showBefore) {
+        isShowingBefore = showBefore;
+        if (showBefore) {
+          card.classList.add('show-before');
+          imgAfter.style.opacity = '0';
+          badge.textContent = currentLang === 'ES' ? 'ESTADO ANTERIOR' : 'BEFORE STATE';
+        } else {
+          card.classList.remove('show-before');
+          imgAfter.style.opacity = '1';
+          badge.textContent = currentLang === 'ES' ? 'DESPUÉS' : 'AFTER';
+        }
+      }
+
       card.addEventListener('mouseenter', () => {
-        imgAfter.style.opacity = '0';
-        badge.textContent = isEs ? 'ESTADO ANTERIOR' : 'BEFORE STATE';
+        updateCompareState(true);
       });
       card.addEventListener('mouseleave', () => {
-        imgAfter.style.opacity = '1';
-        badge.textContent = isEs ? 'DESPUÉS' : 'AFTER';
+        updateCompareState(false);
+      });
+
+      card.addEventListener('click', (e) => {
+        if (window.innerWidth < 992 || window.matchMedia('(hover: none)').matches) {
+          e.preventDefault();
+          updateCompareState(!isShowingBefore);
+        }
       });
 
       card.appendChild(wrapper);

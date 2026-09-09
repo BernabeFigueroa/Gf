@@ -160,6 +160,9 @@ body.view-residencial-active #view-grid {
   background-color: transparent !important;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   overflow: hidden;
   display: inline-flex;
   flex-direction: row;
@@ -199,6 +202,11 @@ body.view-residencial-active #view-grid {
   object-fit: contain;
   display: block;
   transition: opacity 0.35s ease-in-out;
+  pointer-events: none;
+}
+
+video.grid-comparison-overlay-img {
+  object-fit: cover;
   pointer-events: none;
 }
 
