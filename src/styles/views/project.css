@@ -60,6 +60,9 @@
     margin: 0;
     padding: 0;
   }
+  .project-img-slide img[src*="binnis-7"] {
+    object-position: center 25%;
+  }
 }
 
 /* Mobile Vertical Stack */
