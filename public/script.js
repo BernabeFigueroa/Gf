@@ -386,6 +386,25 @@ function navigateTo(viewId, activeTabId = null) {
   } else if (targetPanel) {
     targetPanel.scrollTo({ top: 0, behavior: 'instant' });
   }
+
+  // Si salimos de la sección marmol, pausar y silenciar de inmediato los videos
+  if (viewId !== 'marmol') {
+    const marmolVideos = document.querySelectorAll('#view-marmol video');
+    marmolVideos.forEach(v => {
+      v.pause();
+      try { v.currentTime = 0; } catch (e) {}
+      v.muted = true;
+    });
+    document.querySelectorAll('.marmol-sound-toggle').forEach(btn => {
+      btn.classList.add('is-muted');
+      const onIcon = btn.querySelector('.sound-on');
+      const offIcon = btn.querySelector('.sound-off');
+      if (onIcon && offIcon) {
+        onIcon.style.display = 'none';
+        offIcon.style.display = 'block';
+      }
+    });
+  }
 }
 
 function updateViewTheme(viewId, targetTab = null) {
@@ -409,12 +428,8 @@ function updateViewTheme(viewId, targetTab = null) {
     }
   }
 
-  const isResidencial = viewId === 'grid' && targetTab === 'residencial';
-  if (isResidencial) {
-    document.body.classList.add('view-residencial-active');
-  } else {
-    document.body.classList.remove('view-residencial-active');
-  }
+  // Con el proyecto principal cargado, Residencial usa el header flotante editorial unificado
+  document.body.classList.remove('view-residencial-active');
 
   const isHeaderBarView = viewId === 'marmol' || viewId === 'about';
   if (isHeaderBarView) {
@@ -1083,8 +1098,8 @@ const UI_TRANSLATIONS = {
     EN: 'STUDIO & WORKSHOP'
   },
   label_services: {
-    ES: 'ESPECIALIDAD & ASESORAMIENTO',
-    EN: 'SPECIALTY & CONSULTATION'
+    ES: 'VISUALIZACIÓN 3D & RENDERS',
+    EN: '3D VISUALIZATION & RENDERS'
   },
   label_inquiries: {
     ES: 'CONSULTAS',
@@ -1324,6 +1339,13 @@ function updateAboutContent() {
       : (CONTENT_I18N.services_en || CONTENT_I18N.services_es);
   }
 
+  const disciplinesEl = document.getElementById('about-disciplines');
+  if (disciplinesEl && (CONTENT_I18N.disciplines_es || CONTENT_I18N.disciplines_en)) {
+    disciplinesEl.textContent = currentLang === 'ES'
+      ? (CONTENT_I18N.disciplines_es || disciplinesEl.textContent)
+      : (CONTENT_I18N.disciplines_en || disciplinesEl.textContent);
+  }
+
   const igLink = document.getElementById('about-instagram-link');
   if (igLink && CONTENT_I18N.instagram) {
     igLink.href = CONTENT_I18N.instagram;
@@ -1350,16 +1372,158 @@ function renderMarmolShowcase() {
     const card = document.createElement('div');
 
     if (item.video) {
-      card.className = 'marmol-card-video';
+      const isReel = item.isReel || item.aspect === 'reel';
+      card.className = isReel ? 'marmol-card-video is-reel' : 'marmol-card-video';
+
+      const mediaWrapper = document.createElement('div');
+      mediaWrapper.className = isReel ? 'marmol-video-wrapper is-reel' : 'marmol-video-wrapper';
+
       const video = document.createElement('video');
       video.src = item.video;
       if (item.thumbnail) video.poster = item.thumbnail;
-      video.autoplay = true;
       video.loop = true;
-      video.muted = true;
       video.playsInline = true;
-      video.className = 'marmol-video-element';
-      card.appendChild(video);
+      video.className = isReel ? 'marmol-video-element is-reel' : 'marmol-video-element';
+
+      const shouldHaveAudio = item.hasAudio || (item.muted === false) || isReel;
+      if (shouldHaveAudio) {
+        // NO autoiniciar: el video debe estar pausado y en silencio hasta que se scrolee y aparezca en pantalla
+        video.autoplay = false;
+        video.preload = 'auto';
+        video.muted = true;
+
+        const soundBtn = document.createElement('button');
+        soundBtn.className = 'marmol-sound-toggle is-muted';
+        soundBtn.type = 'button';
+        soundBtn.setAttribute('aria-label', isEs ? 'Activar o silenciar sonido' : 'Toggle sound');
+        soundBtn.innerHTML = `
+          <svg class="sound-icon sound-on" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <svg class="sound-icon sound-off" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        `;
+
+        function syncSoundUI(isMuted) {
+          const onIcon = soundBtn.querySelector('.sound-on');
+          const offIcon = soundBtn.querySelector('.sound-off');
+          if (onIcon && offIcon) {
+            onIcon.style.display = isMuted ? 'none' : 'block';
+            offIcon.style.display = isMuted ? 'block' : 'none';
+          }
+          soundBtn.classList.toggle('is-muted', isMuted);
+        }
+
+        let userMutedManually = false;
+        let hasTriggeredFirstStart = false;
+
+        soundBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          video.muted = !video.muted;
+          userMutedManually = video.muted;
+          syncSoundUI(video.muted);
+          if (!video.muted && video.paused) {
+            video.play().catch(() => {});
+          }
+        });
+
+        video.addEventListener('click', () => {
+          video.muted = !video.muted;
+          userMutedManually = video.muted;
+          syncSoundUI(video.muted);
+          if (!video.muted && video.paused) {
+            video.play().catch(() => {});
+          }
+        });
+
+        const startOrResumeVideo = () => {
+          if (!hasTriggeredFirstStart) {
+            hasTriggeredFirstStart = true;
+            try { video.currentTime = 0; } catch (e) {}
+          }
+          if (!userMutedManually) {
+            video.muted = false;
+            syncSoundUI(false);
+          }
+          const p = video.play();
+          if (p !== undefined) {
+            p.catch(() => {
+              // Si las políticas de autoplay bloquean sonido sin click, reproduce silenciado y actualiza UI
+              video.muted = true;
+              syncSoundUI(true);
+              video.play().catch(() => {});
+            });
+          }
+        };
+
+        const pauseAndMuteVideo = () => {
+          video.pause();
+          if (!video.muted) {
+            video.muted = true;
+            syncSoundUI(true);
+          }
+        };
+
+        // MOTOR DE REPRODUCCIÓN & AUDIO POR SCROLL
+        // El video inicia desde cero y con sonido RECIÉN cuando el usuario scrolea y el video aparece en pantalla
+        const evaluateScrollVideo = () => {
+          if (currentView !== 'marmol') {
+            pauseAndMuteVideo();
+            return;
+          }
+
+          const rect = video.getBoundingClientRect();
+          const vh = window.innerHeight || document.documentElement.clientHeight;
+
+          // En pantalla cuando entra en el viewport visible
+          const inViewport = rect.top < (vh * 0.75) && rect.bottom > (vh * 0.25);
+
+          if (inViewport) {
+            startOrResumeVideo();
+          } else {
+            pauseAndMuteVideo();
+          }
+        };
+
+        const marmolContainer = document.getElementById('view-marmol');
+        if (marmolContainer) {
+          marmolContainer.addEventListener('scroll', evaluateScrollVideo, { passive: true });
+        }
+        window.addEventListener('scroll', evaluateScrollVideo, { passive: true });
+
+        // Detección por IntersectionObserver para respuesta inmediata al aparecer
+        if ('IntersectionObserver' in window) {
+          const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (currentView !== 'marmol') {
+                pauseAndMuteVideo();
+                return;
+              }
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+                startOrResumeVideo();
+              } else if (!entry.isIntersecting || entry.intersectionRatio < 0.2) {
+                pauseAndMuteVideo();
+              }
+            });
+          }, { threshold: [0, 0.2, 0.35, 0.5, 0.75] });
+
+          obs.observe(video);
+        }
+
+        mediaWrapper.appendChild(video);
+        mediaWrapper.appendChild(soundBtn);
+      } else {
+        video.autoplay = true;
+        video.muted = true;
+        mediaWrapper.appendChild(video);
+      }
+
+      card.appendChild(mediaWrapper);
     } else if (item.image_before && (item.image_after || item.video_after)) {
       card.className = 'marmol-card-comparison';
       const wrapper = document.createElement('div');

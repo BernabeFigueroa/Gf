@@ -18,6 +18,9 @@ const targetDirs = [
   'public/images/arquitectura/binnis',
   'public/images/arquitectura/buffalo',
   'public/images/arquitectura/rosso',
+  'public/images/arquitectura/cafeteria',
+  'public/images/arquitectura/Consultorio',
+  'public/images/residencial/BM',
   'public/images/arquitecto'
 ];
 
