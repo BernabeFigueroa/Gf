@@ -208,6 +208,41 @@
   .marmol-card-video {
     grid-column: span 7;
   }
+
+  .marmol-card-video.is-reel {
+    grid-column: span 5;
+  }
+}
+
+.marmol-card-video.is-reel {
+  align-items: center;
+  justify-content: center;
+}
+
+.marmol-card-video.is-reel .marmol-video-element {
+  width: auto;
+  max-width: 320px;
+  max-height: 560px;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+
+.marmol-video-wrapper {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+.marmol-card-video.is-reel .marmol-video-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: auto;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .marmol-video-element {
@@ -218,6 +253,49 @@
   object-fit: cover;
   background-color: transparent;
   display: block;
+}
+
+.marmol-sound-toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(18, 14, 18, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.marmol-sound-toggle:hover {
+  background: rgba(18, 14, 18, 0.9);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.08);
+}
+
+.marmol-sound-toggle:active {
+  transform: scale(0.95);
+}
+
+.marmol-sound-toggle svg {
+  display: block;
+  stroke: #ffffff;
+}
+
+.marmol-sound-toggle.is-muted {
+  background: rgba(18, 14, 18, 0.75);
+  border-color: rgba(255, 255, 255, 0.15);
+  opacity: 0.85;
 }
 
 .marmol-card-wide {
@@ -231,6 +309,10 @@
 
   .marmol-card-video + .marmol-card-wide {
     grid-column: span 5;
+  }
+
+  .marmol-card-video.is-reel + .marmol-card-wide {
+    grid-column: span 7;
   }
 }
 
@@ -263,7 +345,9 @@
 
 @media (min-width: 992px) {
   .marmol-card-comparison {
-    grid-column: span 6;
+    grid-column: span 12;
+    max-width: 920px;
+    margin: 0 auto;
   }
 }
 
